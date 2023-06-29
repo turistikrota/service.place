@@ -1,1 +1,40 @@
 package command
+
+import (
+	"context"
+
+	"api.turistikrota.com/place/src/domain/feature"
+	"github.com/mixarchitecture/i18np"
+	"github.com/turistikrota/service.shared/decorator"
+)
+
+type FeatureEnableCommand struct{}
+
+type FeatureEnableResult struct{}
+
+type FeatureEnableHandler decorator.CommandHandler[FeatureEnableCommand, *FeatureEnableResult]
+
+type featureEnableHandler struct {
+	repo    feature.Repository
+	factory feature.Factory
+}
+
+type FeatureEnableHandlerConfig struct {
+	Repo     feature.Repository
+	Factory  feature.Factory
+	CqrsBase decorator.Base
+}
+
+func NewFeatureEnableHandler(config FeatureEnableHandlerConfig) FeatureEnableHandler {
+	return decorator.ApplyCommandDecorators[FeatureEnableCommand, *FeatureEnableResult](
+		featureEnableHandler{
+			repo:    config.Repo,
+			factory: config.Factory,
+		},
+		config.CqrsBase,
+	)
+}
+
+func (h featureEnableHandler) Handle(ctx context.Context, command FeatureEnableCommand) (*FeatureEnableResult, *i18np.Error) {
+	return &FeatureEnableResult{}, nil
+}
