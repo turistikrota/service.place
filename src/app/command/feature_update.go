@@ -8,7 +8,11 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type FeatureUpdateCommand struct{}
+type FeatureUpdateCommand struct {
+	UUID         string
+	Icon         string
+	Translations map[feature.Locale]feature.Translations
+}
 
 type FeatureUpdateResult struct{}
 
@@ -36,5 +40,10 @@ func NewFeatureUpdateHandler(config FeatureUpdateHandlerConfig) FeatureUpdateHan
 }
 
 func (h featureUpdateHandler) Handle(ctx context.Context, command FeatureUpdateCommand) (*FeatureUpdateResult, *i18np.Error) {
+	f := h.factory.New(command.Icon, command.Translations)
+	err := h.repo.Update(ctx, command.UUID, f)
+	if err != nil {
+		return nil, err
+	}
 	return &FeatureUpdateResult{}, nil
 }
