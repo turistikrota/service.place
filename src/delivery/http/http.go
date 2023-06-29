@@ -13,8 +13,8 @@ import (
 	"github.com/turistikrota/service.shared/server/http/auth/required_access"
 	"github.com/turistikrota/service.shared/server/http/parser"
 
-	"api.turistikrota.com/account/src/app"
-	"api.turistikrota.com/account/src/config"
+	"api.turistikrota.com/place/src/app"
+	"api.turistikrota.com/place/src/config"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/timeout"
 	"github.com/mixarchitecture/i18np"

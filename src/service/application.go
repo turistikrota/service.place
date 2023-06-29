@@ -1,13 +1,13 @@
 package service
 
 import (
-	"api.turistikrota.com/account/src/adapters"
-	"api.turistikrota.com/account/src/app"
-	"api.turistikrota.com/account/src/app/command"
-	"api.turistikrota.com/account/src/app/query"
-	"api.turistikrota.com/account/src/config"
-	"api.turistikrota.com/account/src/domain/account"
-	"api.turistikrota.com/account/src/domain/platform"
+	"api.turistikrota.com/place/src/adapters"
+	"api.turistikrota.com/place/src/app"
+	"api.turistikrota.com/place/src/app/command"
+	"api.turistikrota.com/place/src/app/query"
+	"api.turistikrota.com/place/src/config"
+	"api.turistikrota.com/place/src/domain/account"
+	"api.turistikrota.com/place/src/domain/platform"
 	"github.com/turistikrota/service.shared/db/mongo"
 	"github.com/turistikrota/service.shared/db/redis"
 	"github.com/turistikrota/service.shared/decorator"
@@ -16,11 +16,11 @@ import (
 )
 
 type Config struct {
-	App           config.App
-	EventEngine   events.Engine
-	Mongo  *mongo.DB
-	Validator     *validator.Validator
-	CacheSrv      redis.Service
+	App         config.App
+	EventEngine events.Engine
+	Mongo       *mongo.DB
+	Validator   *validator.Validator
+	CacheSrv    redis.Service
 }
 
 func NewApplication(config Config) app.Application {

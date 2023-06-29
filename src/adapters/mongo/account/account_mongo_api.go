@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"api.turistikrota.com/account/src/adapters/mongo/account/entity"
-	"api.turistikrota.com/account/src/domain/account"
+	"api.turistikrota.com/place/src/adapters/mongo/account/entity"
+	"api.turistikrota.com/place/src/domain/account"
 	"github.com/mixarchitecture/i18np"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

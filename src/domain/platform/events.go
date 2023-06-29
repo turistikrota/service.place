@@ -1,7 +1,7 @@
 package platform
 
 import (
-	"api.turistikrota.com/account/src/config"
+	"api.turistikrota.com/place/src/config"
 	"github.com/turistikrota/service.shared/events"
 )
 

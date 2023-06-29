@@ -1,8 +1,8 @@
 package platform
 
 import (
-	"api.turistikrota.com/account/src/adapters/mongo/platform/entity"
-	"api.turistikrota.com/account/src/domain/platform"
+	"api.turistikrota.com/place/src/adapters/mongo/platform/entity"
+	"api.turistikrota.com/place/src/domain/platform"
 	mongo2 "github.com/turistikrota/service.shared/db/mongo"
 	"go.mongodb.org/mongo-driver/mongo"
 )

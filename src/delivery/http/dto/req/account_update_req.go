@@ -3,7 +3,7 @@ package req
 import (
 	"time"
 
-	"api.turistikrota.com/account/src/app/command"
+	"api.turistikrota.com/place/src/app/command"
 	"github.com/turistikrota/service.shared/formats"
 )
 

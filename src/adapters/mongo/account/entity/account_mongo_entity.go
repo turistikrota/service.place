@@ -3,7 +3,7 @@ package entity
 import (
 	"time"
 
-	"api.turistikrota.com/account/src/domain/account"
+	"api.turistikrota.com/place/src/domain/account"
 )
 
 type MongoAccount struct {

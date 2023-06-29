@@ -1,6 +1,6 @@
 package res
 
-import "api.turistikrota.com/account/src/app/command"
+import "api.turistikrota.com/place/src/app/command"
 
 type AccountCreateResponse struct {
 	AccountName string `json:"accountName"`

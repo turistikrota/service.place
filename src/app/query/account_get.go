@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"api.turistikrota.com/account/src/domain/account"
+	"api.turistikrota.com/place/src/domain/account"
 	"github.com/mixarchitecture/i18np"
 	"github.com/turistikrota/service.shared/cache"
 	"github.com/turistikrota/service.shared/db/redis"

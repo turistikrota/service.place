@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	"api.turistikrota.com/account/src/adapters/mongo/platform/entity"
+	"api.turistikrota.com/place/src/adapters/mongo/platform/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 
-	"api.turistikrota.com/account/src/domain/platform"
+	"api.turistikrota.com/place/src/domain/platform"
 	"github.com/mixarchitecture/i18np"
 )
 

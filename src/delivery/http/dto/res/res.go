@@ -1,8 +1,8 @@
 package res
 
 import (
-	"api.turistikrota.com/account/src/app/command"
-	"api.turistikrota.com/account/src/app/query"
+	"api.turistikrota.com/place/src/app/command"
+	"api.turistikrota.com/place/src/app/query"
 )
 
 type Response interface {

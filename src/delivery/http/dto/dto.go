@@ -1,8 +1,8 @@
 package dto
 
 import (
-	"api.turistikrota.com/account/src/delivery/http/dto/req"
-	"api.turistikrota.com/account/src/delivery/http/dto/res"
+	"api.turistikrota.com/place/src/delivery/http/dto/req"
+	"api.turistikrota.com/place/src/delivery/http/dto/res"
 )
 
 var (

@@ -1,6 +1,6 @@
 package req
 
-import "api.turistikrota.com/account/src/app/command"
+import "api.turistikrota.com/place/src/app/command"
 
 type AccountSocialRequest struct {
 	AccountDetailRequest

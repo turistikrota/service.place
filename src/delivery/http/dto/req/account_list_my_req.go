@@ -1,6 +1,6 @@
 package req
 
-import "api.turistikrota.com/account/src/app/query"
+import "api.turistikrota.com/place/src/app/query"
 
 type AccountListMyRequest struct{}
 

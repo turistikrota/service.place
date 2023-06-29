@@ -1,6 +1,6 @@
 package req
 
-import "api.turistikrota.com/account/src/app/command"
+import "api.turistikrota.com/place/src/app/command"
 
 type AccountCreateRequest struct {
 	UserName string `json:"userName" validate:"required,username,max=20,min=3"`

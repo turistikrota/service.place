@@ -9,9 +9,9 @@ import (
 	"github.com/turistikrota/service.shared/db/redis"
 	"github.com/turistikrota/service.shared/validator"
 
-	"api.turistikrota.com/account/src/config"
-	"api.turistikrota.com/account/src/delivery"
-	"api.turistikrota.com/account/src/service"
+	"api.turistikrota.com/place/src/config"
+	"api.turistikrota.com/place/src/delivery"
+	"api.turistikrota.com/place/src/service"
 	"github.com/mixarchitecture/i18np"
 	"github.com/turistikrota/service.shared/env"
 	"github.com/turistikrota/service.shared/events/nats"
@@ -40,11 +40,11 @@ func main() {
 		DB:       cnf.CacheRedis.Db,
 	})
 	app := service.NewApplication(service.Config{
-		App:           cnf,
-		EventEngine:   eventEngine,
-		Mongo:  mongo,
-		Validator:     valid,
-		CacheSrv:      cache,
+		App:         cnf,
+		EventEngine: eventEngine,
+		Mongo:       mongo,
+		Validator:   valid,
+		CacheSrv:    cache,
 	})
 	r := redis.New(&redis.Config{
 		Host:     cnf.Redis.Host,
