@@ -12,6 +12,7 @@ type fields struct {
 	IsPayed          string
 	UpdatedAt        string
 	CreatedAt        string
+	Coordinates      string
 }
 
 type translationFields struct {
@@ -55,6 +56,7 @@ var Fields = fields{
 	IsPayed:          "is_payed",
 	UpdatedAt:        "updated_at",
 	CreatedAt:        "created_at",
+	Coordinates:      "coordinates",
 }
 
 var TranslationFields = translationFields{

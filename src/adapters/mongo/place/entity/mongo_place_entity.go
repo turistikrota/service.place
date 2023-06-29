@@ -14,6 +14,7 @@ type (
 		Translations     map[string]MongoTranslation `bson:"translations"`
 		AverageTimeSpent MongoTimeSpent              `bson:"average_time_spent"`
 		Review           MongoReview                 `bson:"review"`
+		Coordinates      []float64                   `bson:"coordinates"`
 		IsActive         bool                        `bson:"is_active"`
 		IsDeleted        bool                        `bson:"is_deleted"`
 		IsPayed          bool                        `bson:"is_payed"`
@@ -53,6 +54,7 @@ func (e *MongoPlace) FromEntity(entity *place.Entity) *MongoPlace {
 	e.AverageTimeSpent = e.fromTimeSpent(entity.AverageTimeSpent)
 	e.Review = e.fromReview(entity.Review)
 	e.IsActive = entity.IsActive
+	e.Coordinates = entity.Coordinates
 	e.IsDeleted = entity.IsDeleted
 	e.IsPayed = entity.IsPayed
 	t := time.Now()
@@ -69,6 +71,7 @@ func (e *MongoPlace) FromEntityUpdate(entity *place.Entity) *MongoPlace {
 	e.Review = e.fromReview(entity.Review)
 	e.IsActive = entity.IsActive
 	e.IsDeleted = entity.IsDeleted
+	e.Coordinates = entity.Coordinates
 	e.IsPayed = entity.IsPayed
 	e.UpdatedAt = time.Now()
 	return e
@@ -80,6 +83,7 @@ func (e *MongoPlace) ToListEntity() *place.Entity {
 		Images:           e.toImages(),
 		Translations:     e.toTranslations(),
 		AverageTimeSpent: e.toTimeSpent(),
+		Coordinates:      e.Coordinates,
 		Review:           e.toReview(),
 		IsPayed:          e.IsPayed,
 	}
@@ -93,6 +97,7 @@ func (e *MongoPlace) ToAdminListEntity() *place.Entity {
 		Translations:     e.toTranslations(),
 		AverageTimeSpent: e.toTimeSpent(),
 		Review:           e.toReview(),
+		Coordinates:      e.Coordinates,
 		IsPayed:          e.IsPayed,
 		IsActive:         e.IsActive,
 		IsDeleted:        e.IsDeleted,
@@ -106,6 +111,7 @@ func (e *MongoPlace) ToViewEntity() *place.Entity {
 		Translations:     e.toTranslations(),
 		AverageTimeSpent: e.toTimeSpent(),
 		Review:           e.toReview(),
+		Coordinates:      e.Coordinates,
 		IsPayed:          e.IsPayed,
 		CreatedAt:        e.CreatedAt,
 	}
@@ -120,6 +126,7 @@ func (e *MongoPlace) ToAdminViewEntity() *place.Entity {
 		AverageTimeSpent: e.toTimeSpent(),
 		Review:           e.toReview(),
 		IsPayed:          e.IsPayed,
+		Coordinates:      e.Coordinates,
 		IsActive:         e.IsActive,
 		IsDeleted:        e.IsDeleted,
 		UpdatedAt:        e.UpdatedAt,

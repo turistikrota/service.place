@@ -9,6 +9,7 @@ type Entity struct {
 	Translations     map[Locale]Translations `json:"translations"`
 	AverageTimeSpent TimeSpent               `json:"averageTimeSpent"`
 	Review           Review                  `json:"review"`
+	Coordinates      []float64               `json:"coordinates"`
 	IsActive         bool                    `json:"is_active"`
 	IsDeleted        bool                    `json:"is_deleted"`
 	IsPayed          bool                    `json:"is_payed"`

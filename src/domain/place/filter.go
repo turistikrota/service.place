@@ -5,11 +5,11 @@ type EntityFilter struct {
 	Query            string
 	Coordinates      []float64
 	FeatureUUIDs     []string
-	AverageTimeSpent TimeSpent
+	AverageTimeSpent *TimeSpent
 	Distance         float64
-	IsPayed          bool
-	MinReview        int16
-	MaxReview        int16
-	MinAveragePoint  float32
-	MaxAveragePoint  float32
+	IsPayed          *bool
+	MinReview        *int16
+	MaxReview        *int16
+	MinAveragePoint  *float32
+	MaxAveragePoint  *float32
 }
