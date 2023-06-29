@@ -8,7 +8,15 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type PlaceCreateCommand struct{}
+type PlaceCreateCommand struct {
+	FeatureUUIDs     []string
+	Images           []place.Image
+	Translations     map[place.Locale]place.Translations
+	AverageTimeSpent place.TimeSpent
+	Review           place.Review
+	Coordinates      []float64
+	IsPayed          bool
+}
 
 type PlaceCreateResult struct{}
 
@@ -36,5 +44,18 @@ func NewPlaceCreateHandler(config PlaceCreateHandlerConfig) PlaceCreateHandler {
 }
 
 func (h placeCreateHandler) Handle(ctx context.Context, command PlaceCreateCommand) (*PlaceCreateResult, *i18np.Error) {
+	p := h.factory.New(place.NewConfig{
+		FeatureUUIDs:     command.FeatureUUIDs,
+		Images:           command.Images,
+		Translations:     command.Translations,
+		AverageTimeSpent: command.AverageTimeSpent,
+		Review:           command.Review,
+		Coordinates:      command.Coordinates,
+		IsPayed:          command.IsPayed,
+	})
+	err := h.repo.Create(ctx, p)
+	if err != nil {
+		return nil, err
+	}
 	return &PlaceCreateResult{}, nil
 }
