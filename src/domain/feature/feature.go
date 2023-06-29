@@ -3,8 +3,8 @@ package feature
 import "time"
 
 type Entity struct {
-	UUID         string                  `json:"uuid"`
-	MainUUID     string                  `json:"main_uuid"`
+	UUID string `json:"uuid"`
+	// MainUUID     string                  `json:"main_uuid"`
 	Icon         string                  `json:"icon"`
 	Translations map[Locale]Translations `json:"translations"`
 	IsActive     bool                    `json:"is_active"`
