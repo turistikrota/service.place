@@ -6,6 +6,7 @@ type Errors interface {
 	Failed(string) *i18np.Error
 	InvalidUUID() *i18np.Error
 	NotFound() *i18np.Error
+	FeatureUUIDsNotFound([]string) *i18np.Error
 }
 
 type placeErrors struct{}
@@ -26,4 +27,10 @@ func (e *placeErrors) InvalidUUID() *i18np.Error {
 
 func (e *placeErrors) NotFound() *i18np.Error {
 	return i18np.NewError(I18nMessages.NotFound)
+}
+
+func (e *placeErrors) FeatureUUIDsNotFound(featureUUIDs []string) *i18np.Error {
+	return i18np.NewError(I18nMessages.FeatureUUIDsNotFound, i18np.P{
+		"FeatureUUIDs": featureUUIDs,
+	})
 }
