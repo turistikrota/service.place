@@ -8,7 +8,10 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type FeatureCreateCommand struct{}
+type FeatureCreateCommand struct {
+	Icon         string
+	Translations map[feature.Locale]feature.Translations
+}
 
 type FeatureCreateResult struct{}
 
@@ -36,5 +39,10 @@ func NewFeatureCreateHandler(config FeatureCreateHandlerConfig) FeatureCreateHan
 }
 
 func (h featureCreateHandler) Handle(ctx context.Context, command FeatureCreateCommand) (*FeatureCreateResult, *i18np.Error) {
+	f := h.factory.New(command.Icon, command.Translations)
+	err := h.repo.Create(ctx, f)
+	if err != nil {
+		return nil, err
+	}
 	return &FeatureCreateResult{}, nil
 }
