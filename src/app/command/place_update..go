@@ -24,11 +24,13 @@ type (
 	PlaceUpdateHandler decorator.CommandHandler[PlaceUpdateCommand, *PlaceUpdateResult]
 	placeUpdateHandler struct {
 		repo        place.Repository
+		events      place.Events
 		featureRepo feature.Repository
 		factory     place.Factory
 	}
 	PlaceUpdateHandlerConfig struct {
 		Repo        place.Repository
+		Events      place.Events
 		FeatureRepo feature.Repository
 		Factory     place.Factory
 		CqrsBase    decorator.Base
@@ -39,6 +41,7 @@ func NewPlaceUpdateHandler(config PlaceUpdateHandlerConfig) PlaceUpdateHandler {
 	return decorator.ApplyCommandDecorators[PlaceUpdateCommand, *PlaceUpdateResult](
 		placeUpdateHandler{
 			repo:        config.Repo,
+			events:      config.Events,
 			featureRepo: config.FeatureRepo,
 			factory:     config.Factory,
 		},

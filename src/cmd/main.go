@@ -13,6 +13,7 @@ import (
 	"api.turistikrota.com/place/src/delivery"
 	"api.turistikrota.com/place/src/service"
 	"github.com/mixarchitecture/i18np"
+	"github.com/mixarchitecture/mredis"
 	"github.com/turistikrota/service.shared/env"
 	"github.com/turistikrota/service.shared/events/nats"
 	"github.com/turistikrota/service.shared/logs"
@@ -33,7 +34,7 @@ func main() {
 	valid.ConnectCustom()
 	valid.RegisterTagName()
 	mongo := loadMongo(cnf)
-	cache := redis.New(&redis.Config{
+	cache := mredis.New(&mredis.Config{
 		Host:     cnf.CacheRedis.Host,
 		Port:     cnf.CacheRedis.Port,
 		Password: cnf.CacheRedis.Pw,
@@ -79,14 +80,14 @@ func main() {
 
 func loadMongo(cnf config.App) *mongo.DB {
 	uri := mongo.CalcMongoUri(mongo.UriParams{
-		Host:  cnf.DB.Account.Host,
-		Port:  cnf.DB.Account.Port,
-		User:  cnf.DB.Account.Username,
-		Pass:  cnf.DB.Account.Password,
-		Db:    cnf.DB.Account.Database,
-		Query: cnf.DB.Account.Query,
+		Host:  cnf.DB.Place.Host,
+		Port:  cnf.DB.Place.Port,
+		User:  cnf.DB.Place.Username,
+		Pass:  cnf.DB.Place.Password,
+		Db:    cnf.DB.Place.Database,
+		Query: cnf.DB.Place.Query,
 	})
-	d, err := mongo.New(uri, cnf.DB.Account.Database)
+	d, err := mongo.New(uri, cnf.DB.Place.Database)
 	if err != nil {
 		panic(err)
 	}

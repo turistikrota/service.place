@@ -16,10 +16,12 @@ type (
 	PlaceDisableHandler decorator.CommandHandler[PlaceDisableCommand, *PlaceDisableResult]
 	placeDisableHandler struct {
 		repo    place.Repository
+		events  place.Events
 		factory place.Factory
 	}
 	PlaceDisableHandlerConfig struct {
 		Repo     place.Repository
+		Events   place.Events
 		Factory  place.Factory
 		CqrsBase decorator.Base
 	}
@@ -29,6 +31,7 @@ func NewPlaceDisableHandler(config PlaceDisableHandlerConfig) PlaceDisableHandle
 	return decorator.ApplyCommandDecorators[PlaceDisableCommand, *PlaceDisableResult](
 		placeDisableHandler{
 			repo:    config.Repo,
+			events:  config.Events,
 			factory: config.Factory,
 		},
 		config.CqrsBase,

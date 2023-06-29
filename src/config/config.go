@@ -1,17 +1,17 @@
 package config
 
-type MongoAccount struct {
-	Host       string `env:"MONGO_ACCOUNT_HOST" envDefault:"localhost"`
-	Port       string `env:"MONGO_ACCOUNT_PORT" envDefault:"27017"`
-	Username   string `env:"MONGO_ACCOUNT_USERNAME" envDefault:""`
-	Password   string `env:"MONGO_ACCOUNT_PASSWORD" envDefault:""`
-	Database   string `env:"MONGO_ACCOUNT_DATABASE" envDefault:"account"`
-	Collection string `env:"MONGO_ACCOUNT_COLLECTION" envDefault:"accounts"`
-	Query      string `env:"MONGO_ACCOUNT_QUERY" envDefault:""`
+type MongoPlace struct {
+	Host       string `env:"MONGO_PLACE_HOST" envDefault:"localhost"`
+	Port       string `env:"MONGO_PLACE_PORT" envDefault:"27017"`
+	Username   string `env:"MONGO_PLACE_USERNAME" envDefault:""`
+	Password   string `env:"MONGO_PLACE_PASSWORD" envDefault:""`
+	Database   string `env:"MONGO_PLACE_DATABASE" envDefault:"account"`
+	Collection string `env:"MONGO_PLACE_COLLECTION" envDefault:"accounts"`
+	Query      string `env:"MONGO_PLACE_QUERY" envDefault:""`
 }
 
-type MongoPlatform struct {
-	Collection string `env:"MONGO_PLATFORM_COLLECTION" envDefault:"accounts"`
+type MongoFeature struct {
+	Collection string `env:"MONGO_FEATURE_COLLECTION" envDefault:"accounts"`
 }
 
 type RSA struct {
@@ -97,8 +97,8 @@ type Nats struct {
 type App struct {
 	Protocol string `env:"PROTOCOL" envDefault:"http"`
 	DB       struct {
-		Account  MongoAccount
-		Platform MongoPlatform
+		Feature MongoFeature
+		Place   MongoPlace
 	}
 	RSA         RSA
 	HttpHeaders HttpHeaders

@@ -6,6 +6,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.47.0
 	github.com/mixarchitecture/cache v1.0.0
 	github.com/mixarchitecture/i18np v0.0.0-20230331235711-ece4c5f1bb52
+	github.com/mixarchitecture/mredis v1.0.1
 	github.com/turistikrota/service.shared v0.0.20
 	go.mongodb.org/mongo-driver v1.12.0
 )

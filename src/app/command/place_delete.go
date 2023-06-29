@@ -16,10 +16,12 @@ type (
 	PlaceDeleteHandler decorator.CommandHandler[PlaceDeleteCommand, *PlaceDeleteResult]
 	placeDeleteHandler struct {
 		repo    place.Repository
+		events  place.Events
 		factory place.Factory
 	}
 	PlaceDeleteHandlerConfig struct {
 		Repo     place.Repository
+		Events   place.Events
 		Factory  place.Factory
 		CqrsBase decorator.Base
 	}
@@ -29,6 +31,7 @@ func NewPlaceDeleteHandler(config PlaceDeleteHandlerConfig) PlaceDeleteHandler {
 	return decorator.ApplyCommandDecorators[PlaceDeleteCommand, *PlaceDeleteResult](
 		placeDeleteHandler{
 			repo:    config.Repo,
+			events:  config.Events,
 			factory: config.Factory,
 		},
 		config.CqrsBase,

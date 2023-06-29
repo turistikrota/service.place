@@ -23,11 +23,13 @@ type (
 	PlaceCreateHandler decorator.CommandHandler[PlaceCreateCommand, *PlaceCreateResult]
 	placeCreateHandler struct {
 		repo        place.Repository
+		events      place.Events
 		featureRepo feature.Repository
 		factory     place.Factory
 	}
 	PlaceCreateHandlerConfig struct {
 		Repo        place.Repository
+		Events      place.Events
 		FeatureRepo feature.Repository
 		Factory     place.Factory
 		CqrsBase    decorator.Base
@@ -38,6 +40,7 @@ func NewPlaceCreateHandler(config PlaceCreateHandlerConfig) PlaceCreateHandler {
 	return decorator.ApplyCommandDecorators[PlaceCreateCommand, *PlaceCreateResult](
 		placeCreateHandler{
 			repo:        config.Repo,
+			events:      config.Events,
 			featureRepo: config.FeatureRepo,
 			factory:     config.Factory,
 		},
