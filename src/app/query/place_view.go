@@ -11,8 +11,13 @@ import (
 )
 
 type (
-	PlaceViewQuery   struct{}
-	PlaceViewResult  struct{}
+	PlaceViewQuery struct {
+		Locale string
+		Slug   string
+	}
+	PlaceViewResult struct {
+		Place *place.Entity
+	}
 	PlaceViewHandler decorator.QueryHandler[PlaceViewQuery, *PlaceViewResult]
 	placeViewHandler struct {
 		repo  place.Repository
@@ -36,19 +41,19 @@ func NewPlaceViewHandler(config PlaceViewHandlerConfig) PlaceViewHandler {
 }
 
 func (h placeViewHandler) Handle(ctx context.Context, query PlaceViewQuery) (*PlaceViewResult, *i18np.Error) {
-	/*
-		    cacheHandler := func() (*post.Entity, *i18np.Error) {
-				return h.repo.View(ctx, post.I18nDetail{
-					Locale: query.Locale,
-					Slug:   query.Slug,
-				})
-			}
-			res, err := h.cache.Creator(h.createCacheEntity).Handler(cacheHandler).Get(h.generateCacheKey(query))
-		    if err != nil {
-				return nil, err
-			}
-	*/
-	return &PlaceViewResult{}, nil
+	cacheHandler := func() (*place.Entity, *i18np.Error) {
+		return h.repo.View(ctx, place.I18nDetail{
+			Locale: query.Locale,
+			Slug:   query.Slug,
+		})
+	}
+	res, err := h.cache.Creator(h.createCacheEntity).Handler(cacheHandler).Get(ctx, h.generateCacheKey(query))
+	if err != nil {
+		return nil, err
+	}
+	return &PlaceViewResult{
+		Place: res,
+	}, nil
 }
 
 func (h placeViewHandler) createCacheEntity() *place.Entity {
@@ -56,5 +61,5 @@ func (h placeViewHandler) createCacheEntity() *place.Entity {
 }
 
 func (h placeViewHandler) generateCacheKey(query PlaceViewQuery) string {
-	return fmt.Sprintf("cache_key")
+	return fmt.Sprintf("place_view_%s_%s", query.Locale, query.Slug)
 }

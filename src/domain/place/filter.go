@@ -13,3 +13,17 @@ type EntityFilter struct {
 	MinAveragePoint  *float32
 	MaxAveragePoint  *float32
 }
+
+func (e *EntityFilter) IsZero() bool {
+	return e.Locale == "" &&
+		e.Query == "" &&
+		e.Coordinates == nil &&
+		e.FeatureUUIDs == nil &&
+		e.AverageTimeSpent == nil &&
+		e.Distance == 0 &&
+		e.IsPayed == nil &&
+		e.MinReview == nil &&
+		e.MaxReview == nil &&
+		e.MinAveragePoint == nil &&
+		e.MaxAveragePoint == nil
+}

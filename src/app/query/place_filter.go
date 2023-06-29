@@ -8,15 +8,22 @@ import (
 	"github.com/mixarchitecture/cache"
 	"github.com/mixarchitecture/i18np"
 	"github.com/turistikrota/service.shared/decorator"
+	"github.com/turistikrota/service.shared/types/list"
 )
 
 type (
-	PlaceFilterQuery   struct{}
-	PlaceFilterResult  struct{}
+	PlaceFilterQuery struct {
+		Filter place.EntityFilter
+		Offset int64
+		Limit  int64
+	}
+	PlaceFilterResult struct {
+		Result list.Result[*place.Entity]
+	}
 	PlaceFilterHandler decorator.QueryHandler[PlaceFilterQuery, *PlaceFilterResult]
 	placeFilterHandler struct {
 		repo  place.Repository
-		cache cache.Client[*place.Entity]
+		cache cache.Client[*list.Result[*place.Entity]]
 	}
 	PlaceFilterHandlerConfig struct {
 		Repo     place.Repository
@@ -29,32 +36,55 @@ func NewPlaceFilterHandler(config PlaceFilterHandlerConfig) PlaceFilterHandler {
 	return decorator.ApplyQueryDecorators[PlaceFilterQuery, *PlaceFilterResult](
 		placeFilterHandler{
 			repo:  config.Repo,
-			cache: cache.New[*place.Entity](config.CacheSrv),
+			cache: cache.New[*list.Result[*place.Entity]](config.CacheSrv),
 		},
 		config.CqrsBase,
 	)
 }
 
 func (h placeFilterHandler) Handle(ctx context.Context, query PlaceFilterQuery) (*PlaceFilterResult, *i18np.Error) {
-	/*
-		    cacheHandler := func() (*post.Entity, *i18np.Error) {
-				return h.repo.Filter(ctx, post.I18nDetail{
-					Locale: query.Locale,
-					Slug:   query.Slug,
-				})
-			}
-			res, err := h.cache.Creator(h.createCacheEntity).Handler(cacheHandler).Get(h.generateCacheKey(query))
-		    if err != nil {
-				return nil, err
-			}
-	*/
-	return &PlaceFilterResult{}, nil
+	if query.Filter.IsZero() {
+		return h.withCache(ctx, query)
+	}
+	return h.withoutCache(ctx, query)
 }
 
-func (h placeFilterHandler) createCacheEntity() *place.Entity {
-	return &place.Entity{}
+func (h placeFilterHandler) withCache(ctx context.Context, query PlaceFilterQuery) (*PlaceFilterResult, *i18np.Error) {
+	cacheHandler := func() (*list.Result[*place.Entity], *i18np.Error) {
+		return h.filter(ctx, query)
+	}
+	res, err := h.cache.Creator(h.createCacheEntity).Handler(cacheHandler).Get(ctx, h.generateCacheKey(query))
+	if err != nil {
+		return nil, err
+	}
+	return &PlaceFilterResult{
+		Result: *res,
+	}, nil
+}
+
+func (h placeFilterHandler) withoutCache(ctx context.Context, query PlaceFilterQuery) (*PlaceFilterResult, *i18np.Error) {
+	res, err := h.filter(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+	return &PlaceFilterResult{
+		Result: *res,
+	}, nil
+}
+
+func (h placeFilterHandler) filter(ctx context.Context, query PlaceFilterQuery) (*list.Result[*place.Entity], *i18np.Error) {
+	return h.repo.Filter(ctx, query.Filter, list.Config{
+		Offset: query.Offset,
+		Limit:  query.Limit,
+	})
+}
+
+func (h placeFilterHandler) createCacheEntity() *list.Result[*place.Entity] {
+	return &list.Result[*place.Entity]{
+		List: make([]*place.Entity, 0),
+	}
 }
 
 func (h placeFilterHandler) generateCacheKey(query PlaceFilterQuery) string {
-	return fmt.Sprintf("cache_key")
+	return fmt.Sprintf("place_filter_%v_%v", query.Offset, query.Limit)
 }
