@@ -26,11 +26,18 @@ func (e *MongoFeature) FromEntity(entity *feature.Entity) *MongoFeature {
 	e.Translations = e.fromTranslations(entity.Translations)
 	e.IsActive = entity.IsActive
 	e.IsDeleted = entity.IsDeleted
-	if entity.UpdatedAt.IsZero() {
-		t := time.Now()
-		entity.UpdatedAt = t
-		entity.CreatedAt = t
-	}
+	t := time.Now()
+	entity.UpdatedAt = t
+	entity.CreatedAt = t
+	return e
+}
+
+func (e *MongoFeature) FromEntityUpdate(entity *feature.Entity) *MongoFeature {
+	e.Icon = entity.Icon
+	e.Translations = e.fromTranslations(entity.Translations)
+	e.IsActive = entity.IsActive
+	e.IsDeleted = entity.IsDeleted
+	entity.UpdatedAt = time.Now()
 	return e
 }
 
@@ -43,6 +50,14 @@ func (e *MongoFeature) ToEntity() *feature.Entity {
 		IsDeleted:    e.IsDeleted,
 		UpdatedAt:    e.UpdatedAt,
 		CreatedAt:    e.CreatedAt,
+	}
+}
+
+func (e *MongoFeature) ToListEntity() *feature.Entity {
+	return &feature.Entity{
+		UUID:         e.UUID,
+		Icon:         e.Icon,
+		Translations: e.toTranslations(),
 	}
 }
 
