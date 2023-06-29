@@ -8,7 +8,9 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type FeatureEnableCommand struct{}
+type FeatureEnableCommand struct {
+	UUID string
+}
 
 type FeatureEnableResult struct{}
 
@@ -36,5 +38,9 @@ func NewFeatureEnableHandler(config FeatureEnableHandlerConfig) FeatureEnableHan
 }
 
 func (h featureEnableHandler) Handle(ctx context.Context, command FeatureEnableCommand) (*FeatureEnableResult, *i18np.Error) {
+	err := h.repo.Enable(ctx, command.UUID)
+	if err != nil {
+		return nil, err
+	}
 	return &FeatureEnableResult{}, nil
 }

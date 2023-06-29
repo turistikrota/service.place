@@ -8,7 +8,9 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type FeatureDeleteCommand struct{}
+type FeatureDeleteCommand struct {
+	UUID string
+}
 
 type FeatureDeleteResult struct{}
 
@@ -36,5 +38,9 @@ func NewFeatureDeleteHandler(config FeatureDeleteHandlerConfig) FeatureDeleteHan
 }
 
 func (h featureDeleteHandler) Handle(ctx context.Context, command FeatureDeleteCommand) (*FeatureDeleteResult, *i18np.Error) {
+	err := h.repo.Delete(ctx, command.UUID)
+	if err != nil {
+		return nil, err
+	}
 	return &FeatureDeleteResult{}, nil
 }
