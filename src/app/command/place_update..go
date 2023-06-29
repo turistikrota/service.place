@@ -9,7 +9,16 @@ import (
 )
 
 type (
-	PlaceUpdateCommand struct{}
+	PlaceUpdateCommand struct {
+		UUID             string
+		FeatureUUIDs     []string
+		Images           []place.Image
+		Translations     map[place.Locale]place.Translations
+		AverageTimeSpent place.TimeSpent
+		Review           place.Review
+		Coordinates      []float64
+		IsPayed          bool
+	}
 	PlaceUpdateResult  struct{}
 	PlaceUpdateHandler decorator.CommandHandler[PlaceUpdateCommand, *PlaceUpdateResult]
 	placeUpdateHandler struct {
@@ -34,5 +43,18 @@ func NewPlaceUpdateHandler(config PlaceUpdateHandlerConfig) PlaceUpdateHandler {
 }
 
 func (h placeUpdateHandler) Handle(ctx context.Context, command PlaceUpdateCommand) (*PlaceUpdateResult, *i18np.Error) {
+	p := h.factory.New(place.NewConfig{
+		FeatureUUIDs:     command.FeatureUUIDs,
+		Images:           command.Images,
+		Translations:     command.Translations,
+		AverageTimeSpent: command.AverageTimeSpent,
+		Review:           command.Review,
+		Coordinates:      command.Coordinates,
+		IsPayed:          command.IsPayed,
+	})
+	err := h.repo.Update(ctx, command.UUID, p)
+	if err != nil {
+		return nil, err
+	}
 	return &PlaceUpdateResult{}, nil
 }
