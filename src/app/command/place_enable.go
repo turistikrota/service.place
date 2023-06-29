@@ -8,7 +8,9 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type PlaceEnableCommand struct{}
+type PlaceEnableCommand struct {
+	UUID string
+}
 
 type PlaceEnableResult struct{}
 
@@ -36,5 +38,9 @@ func NewPlaceEnableHandler(config PlaceEnableHandlerConfig) PlaceEnableHandler {
 }
 
 func (h placeEnableHandler) Handle(ctx context.Context, command PlaceEnableCommand) (*PlaceEnableResult, *i18np.Error) {
+	err := h.repo.Enable(ctx, command.UUID)
+	if err != nil {
+		return nil, err
+	}
 	return &PlaceEnableResult{}, nil
 }
