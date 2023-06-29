@@ -15,7 +15,6 @@ type (
 		Images           []place.Image
 		Translations     map[place.Locale]place.Translations
 		AverageTimeSpent place.TimeSpent
-		Review           place.Review
 		Coordinates      []float64
 		IsPayed          bool
 	}
@@ -58,7 +57,6 @@ func (h placeCreateHandler) Handle(ctx context.Context, command PlaceCreateComma
 		Images:           command.Images,
 		Translations:     command.Translations,
 		AverageTimeSpent: command.AverageTimeSpent,
-		Review:           command.Review,
 		Coordinates:      command.Coordinates,
 		IsPayed:          command.IsPayed,
 	})
