@@ -58,30 +58,6 @@ func New(config Config) Server {
 func (h Server) Load(router fiber.Router) fiber.Router {
 	router.Use(h.cors(), h.deviceUUID())
 
-	platform := router.Group("/platform")
-	platform.Get("/", h.wrapWithTimeout(h.PlatformList))
-	platform.Post("/", h.currentUserAccess(), h.requiredAccess(), h.adminRoute(config.Roles.PlatformCreate), h.wrapWithTimeout(h.PlatformCreate))
-	detail := platform.Group("/:slug")
-	detail.Post("/translation/:locale", h.currentUserAccess(), h.requiredAccess(), h.adminRoute(config.Roles.PlatformTranslationAdd), h.wrapWithTimeout(h.PlatformTranslationCreate))
-	detail.Put("/translation/:locale", h.currentUserAccess(), h.requiredAccess(), h.adminRoute(config.Roles.PlatformTranslationUpdate), h.wrapWithTimeout(h.PlatformTranslationUpdate))
-	detail.Delete("/translation/:locale", h.currentUserAccess(), h.requiredAccess(), h.adminRoute(config.Roles.PlatformTranslationDelete), h.wrapWithTimeout(h.PlatformTranslationDelete))
-	detail.Put("/enable", h.currentUserAccess(), h.requiredAccess(), h.adminRoute(config.Roles.PlatformEnable), h.wrapWithTimeout(h.PlatformEnable))
-	detail.Put("/disable", h.currentUserAccess(), h.requiredAccess(), h.adminRoute(config.Roles.PlatformDisable), h.wrapWithTimeout(h.PlatformDisable))
-	detail.Delete("/", h.currentUserAccess(), h.requiredAccess(), h.adminRoute(config.Roles.PlatformDelete), h.wrapWithTimeout(h.PlatformDelete))
-	detail.Put("/", h.currentUserAccess(), h.requiredAccess(), h.adminRoute(config.Roles.PlatformUpdate), h.wrapWithTimeout(h.PlatformUpdate))
-	detail.Get("/", h.currentUserAccess(), h.requiredAccess(), h.adminRoute(config.Roles.PlatformViewDetail), h.wrapWithTimeout(h.PlatformGet))
-
-	router.Post("/", h.currentUserAccess(), h.requiredAccess(), h.wrapWithTimeout(h.AccountCreate))
-	router.Get("/", h.currentUserAccess(), h.requiredAccess(), h.wrapWithTimeout(h.AccountListMy))
-	router.Get("/@:userName/my", h.currentUserAccess(), h.requiredAccess(), h.wrapWithTimeout(h.AccountGet))
-	router.Get("/@:userName", h.wrapWithTimeout(h.AccountProfileView))
-	router.Put("/@:userName/enable", h.currentUserAccess(), h.requiredAccess(), h.wrapWithTimeout(h.AccountEnable))
-	router.Put("/@:userName/disable", h.currentUserAccess(), h.requiredAccess(), h.wrapWithTimeout(h.AccountDisable))
-	router.Post("/@:userName/social/:platform", h.currentUserAccess(), h.requiredAccess(), h.wrapWithTimeout(h.AccountSocialAdd))
-	router.Delete("/@:userName/social/:platform", h.currentUserAccess(), h.requiredAccess(), h.wrapWithTimeout(h.AccountSocialRemove))
-	router.Put("/@:userName/social/:platform", h.currentUserAccess(), h.requiredAccess(), h.wrapWithTimeout(h.AccountSocialUpdate))
-	router.Put("/@:userName", h.currentUserAccess(), h.requiredAccess(), h.wrapWithTimeout(h.AccountUpdate))
-	router.Delete("/@:userName", h.currentUserAccess(), h.requiredAccess(), h.wrapWithTimeout(h.AccountDelete))
 	return router
 }
 
