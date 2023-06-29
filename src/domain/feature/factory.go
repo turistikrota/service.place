@@ -13,3 +13,12 @@ func NewFactory() Factory {
 func (f Factory) IsZero() bool {
 	return f.Errors == nil
 }
+
+func (f Factory) New(icon string, translations map[Locale]Translations) *Entity {
+	return &Entity{
+		Icon:         icon,
+		Translations: translations,
+		IsActive:     true,
+		IsDeleted:    false,
+	}
+}
