@@ -8,25 +8,23 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type FeatureCreateCommand struct {
-	Icon         string
-	Translations map[feature.Locale]feature.Translations
-}
-
-type FeatureCreateResult struct{}
-
-type FeatureCreateHandler decorator.CommandHandler[FeatureCreateCommand, *FeatureCreateResult]
-
-type featureCreateHandler struct {
-	repo    feature.Repository
-	factory feature.Factory
-}
-
-type FeatureCreateHandlerConfig struct {
-	Repo     feature.Repository
-	Factory  feature.Factory
-	CqrsBase decorator.Base
-}
+type (
+	FeatureCreateCommand struct {
+		Icon         string
+		Translations map[feature.Locale]feature.Translations
+	}
+	FeatureCreateResult  struct{}
+	FeatureCreateHandler decorator.CommandHandler[FeatureCreateCommand, *FeatureCreateResult]
+	featureCreateHandler struct {
+		repo    feature.Repository
+		factory feature.Factory
+	}
+	FeatureCreateHandlerConfig struct {
+		Repo     feature.Repository
+		Factory  feature.Factory
+		CqrsBase decorator.Base
+	}
+)
 
 func NewFeatureCreateHandler(config FeatureCreateHandlerConfig) FeatureCreateHandler {
 	return decorator.ApplyCommandDecorators[FeatureCreateCommand, *FeatureCreateResult](

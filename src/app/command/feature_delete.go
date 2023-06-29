@@ -8,24 +8,22 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type FeatureDeleteCommand struct {
-	UUID string
-}
-
-type FeatureDeleteResult struct{}
-
-type FeatureDeleteHandler decorator.CommandHandler[FeatureDeleteCommand, *FeatureDeleteResult]
-
-type featureDeleteHandler struct {
-	repo    feature.Repository
-	factory feature.Factory
-}
-
-type FeatureDeleteHandlerConfig struct {
-	Repo     feature.Repository
-	Factory  feature.Factory
-	CqrsBase decorator.Base
-}
+type (
+	FeatureDeleteCommand struct {
+		UUID string
+	}
+	FeatureDeleteResult  struct{}
+	FeatureDeleteHandler decorator.CommandHandler[FeatureDeleteCommand, *FeatureDeleteResult]
+	featureDeleteHandler struct {
+		repo    feature.Repository
+		factory feature.Factory
+	}
+	FeatureDeleteHandlerConfig struct {
+		Repo     feature.Repository
+		Factory  feature.Factory
+		CqrsBase decorator.Base
+	}
+)
 
 func NewFeatureDeleteHandler(config FeatureDeleteHandlerConfig) FeatureDeleteHandler {
 	return decorator.ApplyCommandDecorators[FeatureDeleteCommand, *FeatureDeleteResult](

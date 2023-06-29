@@ -8,24 +8,22 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type FeatureDisableCommand struct {
-	UUID string
-}
-
-type FeatureDisableResult struct{}
-
-type FeatureDisableHandler decorator.CommandHandler[FeatureDisableCommand, *FeatureDisableResult]
-
-type featureDisableHandler struct {
-	repo    feature.Repository
-	factory feature.Factory
-}
-
-type FeatureDisableHandlerConfig struct {
-	Repo     feature.Repository
-	Factory  feature.Factory
-	CqrsBase decorator.Base
-}
+type (
+	FeatureDisableCommand struct {
+		UUID string
+	}
+	FeatureDisableResult  struct{}
+	FeatureDisableHandler decorator.CommandHandler[FeatureDisableCommand, *FeatureDisableResult]
+	featureDisableHandler struct {
+		repo    feature.Repository
+		factory feature.Factory
+	}
+	FeatureDisableHandlerConfig struct {
+		Repo     feature.Repository
+		Factory  feature.Factory
+		CqrsBase decorator.Base
+	}
+)
 
 func NewFeatureDisableHandler(config FeatureDisableHandlerConfig) FeatureDisableHandler {
 	return decorator.ApplyCommandDecorators[FeatureDisableCommand, *FeatureDisableResult](

@@ -8,26 +8,24 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type FeatureUpdateCommand struct {
-	UUID         string
-	Icon         string
-	Translations map[feature.Locale]feature.Translations
-}
-
-type FeatureUpdateResult struct{}
-
-type FeatureUpdateHandler decorator.CommandHandler[FeatureUpdateCommand, *FeatureUpdateResult]
-
-type featureUpdateHandler struct {
-	repo    feature.Repository
-	factory feature.Factory
-}
-
-type FeatureUpdateHandlerConfig struct {
-	Repo     feature.Repository
-	Factory  feature.Factory
-	CqrsBase decorator.Base
-}
+type (
+	FeatureUpdateCommand struct {
+		UUID         string
+		Icon         string
+		Translations map[feature.Locale]feature.Translations
+	}
+	FeatureUpdateResult  struct{}
+	FeatureUpdateHandler decorator.CommandHandler[FeatureUpdateCommand, *FeatureUpdateResult]
+	featureUpdateHandler struct {
+		repo    feature.Repository
+		factory feature.Factory
+	}
+	FeatureUpdateHandlerConfig struct {
+		Repo     feature.Repository
+		Factory  feature.Factory
+		CqrsBase decorator.Base
+	}
+)
 
 func NewFeatureUpdateHandler(config FeatureUpdateHandlerConfig) FeatureUpdateHandler {
 	return decorator.ApplyCommandDecorators[FeatureUpdateCommand, *FeatureUpdateResult](

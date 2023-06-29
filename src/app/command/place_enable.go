@@ -8,24 +8,22 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type PlaceEnableCommand struct {
-	UUID string
-}
-
-type PlaceEnableResult struct{}
-
-type PlaceEnableHandler decorator.CommandHandler[PlaceEnableCommand, *PlaceEnableResult]
-
-type placeEnableHandler struct {
-	repo    place.Repository
-	factory place.Factory
-}
-
-type PlaceEnableHandlerConfig struct {
-	Repo     place.Repository
-	Factory  place.Factory
-	CqrsBase decorator.Base
-}
+type (
+	PlaceEnableCommand struct {
+		UUID string
+	}
+	PlaceEnableResult  struct{}
+	PlaceEnableHandler decorator.CommandHandler[PlaceEnableCommand, *PlaceEnableResult]
+	placeEnableHandler struct {
+		repo    place.Repository
+		factory place.Factory
+	}
+	PlaceEnableHandlerConfig struct {
+		Repo     place.Repository
+		Factory  place.Factory
+		CqrsBase decorator.Base
+	}
+)
 
 func NewPlaceEnableHandler(config PlaceEnableHandlerConfig) PlaceEnableHandler {
 	return decorator.ApplyCommandDecorators[PlaceEnableCommand, *PlaceEnableResult](

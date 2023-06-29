@@ -8,30 +8,28 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type PlaceCreateCommand struct {
-	FeatureUUIDs     []string
-	Images           []place.Image
-	Translations     map[place.Locale]place.Translations
-	AverageTimeSpent place.TimeSpent
-	Review           place.Review
-	Coordinates      []float64
-	IsPayed          bool
-}
-
-type PlaceCreateResult struct{}
-
-type PlaceCreateHandler decorator.CommandHandler[PlaceCreateCommand, *PlaceCreateResult]
-
-type placeCreateHandler struct {
-	repo    place.Repository
-	factory place.Factory
-}
-
-type PlaceCreateHandlerConfig struct {
-	Repo     place.Repository
-	Factory  place.Factory
-	CqrsBase decorator.Base
-}
+type (
+	PlaceCreateCommand struct {
+		FeatureUUIDs     []string
+		Images           []place.Image
+		Translations     map[place.Locale]place.Translations
+		AverageTimeSpent place.TimeSpent
+		Review           place.Review
+		Coordinates      []float64
+		IsPayed          bool
+	}
+	PlaceCreateResult  struct{}
+	PlaceCreateHandler decorator.CommandHandler[PlaceCreateCommand, *PlaceCreateResult]
+	placeCreateHandler struct {
+		repo    place.Repository
+		factory place.Factory
+	}
+	PlaceCreateHandlerConfig struct {
+		Repo     place.Repository
+		Factory  place.Factory
+		CqrsBase decorator.Base
+	}
+)
 
 func NewPlaceCreateHandler(config PlaceCreateHandlerConfig) PlaceCreateHandler {
 	return decorator.ApplyCommandDecorators[PlaceCreateCommand, *PlaceCreateResult](

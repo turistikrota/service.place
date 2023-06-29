@@ -8,22 +8,20 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type PlaceUpdateCommand struct{}
-
-type PlaceUpdateResult struct{}
-
-type PlaceUpdateHandler decorator.CommandHandler[PlaceUpdateCommand, *PlaceUpdateResult]
-
-type placeUpdateHandler struct {
-	repo    place.Repository
-	factory place.Factory
-}
-
-type PlaceUpdateHandlerConfig struct {
-	Repo     place.Repository
-	Factory  place.Factory
-	CqrsBase decorator.Base
-}
+type (
+	PlaceUpdateCommand struct{}
+	PlaceUpdateResult  struct{}
+	PlaceUpdateHandler decorator.CommandHandler[PlaceUpdateCommand, *PlaceUpdateResult]
+	placeUpdateHandler struct {
+		repo    place.Repository
+		factory place.Factory
+	}
+	PlaceUpdateHandlerConfig struct {
+		Repo     place.Repository
+		Factory  place.Factory
+		CqrsBase decorator.Base
+	}
+)
 
 func NewPlaceUpdateHandler(config PlaceUpdateHandlerConfig) PlaceUpdateHandler {
 	return decorator.ApplyCommandDecorators[PlaceUpdateCommand, *PlaceUpdateResult](

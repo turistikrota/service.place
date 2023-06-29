@@ -8,24 +8,22 @@ import (
 	"github.com/turistikrota/service.shared/decorator"
 )
 
-type PlaceDeleteCommand struct {
-	UUID string
-}
-
-type PlaceDeleteResult struct{}
-
-type PlaceDeleteHandler decorator.CommandHandler[PlaceDeleteCommand, *PlaceDeleteResult]
-
-type placeDeleteHandler struct {
-	repo    place.Repository
-	factory place.Factory
-}
-
-type PlaceDeleteHandlerConfig struct {
-	Repo     place.Repository
-	Factory  place.Factory
-	CqrsBase decorator.Base
-}
+type (
+	PlaceDeleteCommand struct {
+		UUID string
+	}
+	PlaceDeleteResult  struct{}
+	PlaceDeleteHandler decorator.CommandHandler[PlaceDeleteCommand, *PlaceDeleteResult]
+	placeDeleteHandler struct {
+		repo    place.Repository
+		factory place.Factory
+	}
+	PlaceDeleteHandlerConfig struct {
+		Repo     place.Repository
+		Factory  place.Factory
+		CqrsBase decorator.Base
+	}
+)
 
 func NewPlaceDeleteHandler(config PlaceDeleteHandlerConfig) PlaceDeleteHandler {
 	return decorator.ApplyCommandDecorators[PlaceDeleteCommand, *PlaceDeleteResult](
