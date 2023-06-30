@@ -63,3 +63,5 @@ feature_invalid_uuid = "Invalid UUID."
 get_query_failed = "Get query failed."
 update_query_not_found = "Update query not found. {{.Error}}"
 update_query_failed = "Update query failed. {{.Error}}"
+
+user_expired = "User expired."
