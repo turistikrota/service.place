@@ -1,27 +1,19 @@
 package http
 
 type successMessages struct {
-	AccountDelete             string
-	AccountCreate             string
-	AccountUpdate             string
-	AccountDisable            string
-	AccountEnable             string
-	AccountSocialAdd          string
-	AccountSocialRemove       string
-	AccountSocialUpdate       string
-	AccountGet                string
-	AccountListMy             string
-	AccountProfileView        string
-	PlatformCreate            string
-	PlatformUpdate            string
-	PlatformEnable            string
-	PlatformDisable           string
-	PlatformDelete            string
-	PlatformTranslationCreate string
-	PlatformTranslationUpdate string
-	PlatformTranslationDelete string
-	PlatformGet               string
-	PlatformList              string
+	FeatureCreate  string
+	FeatureUpdate  string
+	FeatureDelete  string
+	FeatureDisable string
+	FeatureEnable  string
+	FeatureList    string
+	PlaceCreate    string
+	PlaceUpdate    string
+	PlaceDelete    string
+	PlaceDisable   string
+	PlaceEnable    string
+	PlaceFilter    string
+	PlaceView      string
 }
 
 type errorMessages struct {
@@ -37,27 +29,19 @@ type messages struct {
 
 var Messages = messages{
 	Success: successMessages{
-		AccountDelete:             "http_success_account_deleted",
-		AccountCreate:             "http_success_account_created",
-		AccountUpdate:             "http_success_account_updated",
-		AccountDisable:            "http_success_account_disabled",
-		AccountEnable:             "http_success_account_enabled",
-		AccountSocialUpdate:       "http_success_account_social_updated",
-		AccountSocialAdd:          "http_success_account_social_added",
-		AccountSocialRemove:       "http_success_account_social_removed",
-		AccountGet:                "http_success_account_get",
-		AccountListMy:             "http_success_account_list_my",
-		AccountProfileView:        "http_success_account_profile_viewed",
-		PlatformCreate:            "http_success_platform_created",
-		PlatformUpdate:            "http_success_platform_updated",
-		PlatformEnable:            "http_success_platform_enabled",
-		PlatformDisable:           "http_success_platform_disabled",
-		PlatformDelete:            "http_success_platform_deleted",
-		PlatformTranslationCreate: "http_success_platform_translation_created",
-		PlatformTranslationUpdate: "http_success_platform_translation_updated",
-		PlatformTranslationDelete: "http_success_platform_translation_deleted",
-		PlatformGet:               "http_success_platform_get",
-		PlatformList:              "http_success_platform_list",
+		FeatureCreate:  "http_success_feature_create",
+		FeatureUpdate:  "http_success_feature_update",
+		FeatureDelete:  "http_success_feature_delete",
+		FeatureDisable: "http_success_feature_disable",
+		FeatureEnable:  "http_success_feature_enable",
+		FeatureList:    "http_success_feature_list",
+		PlaceCreate:    "http_success_place_create",
+		PlaceUpdate:    "http_success_place_update",
+		PlaceDelete:    "http_success_place_delete",
+		PlaceDisable:   "http_success_place_disable",
+		PlaceEnable:    "http_success_place_enable",
+		PlaceFilter:    "http_success_place_filter",
+		PlaceView:      "http_success_place_view",
 	},
 	Error: errorMessages{
 		RequiredAuth:      "http_error_required_auth",

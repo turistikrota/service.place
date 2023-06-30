@@ -1,9 +1,16 @@
 package http
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"api.turistikrota.com/place/src/delivery/http/dto"
+	"github.com/gofiber/fiber/v2"
+	"github.com/turistikrota/service.shared/server/http/result"
+)
 
 func (h Server) FeatureCreate(ctx *fiber.Ctx) error {
-	return nil
+	d := dto.Request.FeatureCreate()
+	h.parseBody(ctx, d)
+	_, err := h.app.Commands.FeatureCreate.Handle(ctx.UserContext(), d.ToCommand())
+	return result.IfSuccess(err, ctx, h.i18n, Messages.Success.FeatureCreate)
 }
 
 func (h Server) FeatureUpdate(ctx *fiber.Ctx) error {
