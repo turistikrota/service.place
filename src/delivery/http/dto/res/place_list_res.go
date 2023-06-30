@@ -15,20 +15,19 @@ type PlaceFilterResponse struct {
 }
 
 type PlaceFilterChild struct {
-	Images           []place.Image                       `json:"images"`
-	Translations     map[place.Locale]place.Translations `json:"translations"`
-	AverageTimeSpent place.TimeSpent                     `json:"averageTimeSpent"`
-	Review           place.Review                        `json:"review"`
-	Coordinates      []float64                           `json:"coordinates"`
-	IsPayed          bool                                `json:"isPayed"`
+	Images           []place.Image                 `json:"images"`
+	Translations     map[place.Locale]Translations `json:"translations"`
+	AverageTimeSpent place.TimeSpent               `json:"averageTimeSpent"`
+	Review           place.Review                  `json:"review"`
+	Coordinates      []float64                     `json:"coordinates"`
+	IsPayed          bool                          `json:"isPayed"`
 }
 
-type Image struct {
-	Url   string `json:"url"`
-	Order int16  `json:"order"`
+type Translations struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Slug        string `json:"slug"`
 }
-
-type Translations struct{}
 
 func (r *response) PlaceList(res *query.PlaceFilterResult) *PlaceFilterResponse {
 	return &PlaceFilterResponse{
@@ -46,11 +45,23 @@ func (r *response) placeListChild(list []*place.Entity) []PlaceFilterChild {
 	for i, v := range list {
 		res[i] = PlaceFilterChild{
 			Images:           v.Images,
-			Translations:     v.Translations,
+			Translations:     r.translations(v.Translations),
 			AverageTimeSpent: v.AverageTimeSpent,
 			Review:           v.Review,
 			Coordinates:      v.Coordinates,
 			IsPayed:          v.IsPayed,
+		}
+	}
+	return res
+}
+
+func (r *response) translations(translations map[place.Locale]place.Translations) map[place.Locale]Translations {
+	res := make(map[place.Locale]Translations, len(translations))
+	for k, v := range translations {
+		res[k] = Translations{
+			Title:       v.Title,
+			Description: v.Description,
+			Slug:        v.Slug,
 		}
 	}
 	return res
