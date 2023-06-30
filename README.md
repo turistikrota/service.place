@@ -32,5 +32,5 @@ docker build --build-arg GITHUB_USER=<USER_NAME> --build-arg GITHUB_TOKEN=<ACCES
 ### 4. run container
 
 ```bash
-docker service create --name place-api-turistikrota-com --network turistikrota --secret jwt_private_key --secret jwt_public_key --env-file .env --publish 6014:6014 api.turistikrota.com/place:latest
+docker service create --name place-api-turistikrota-com --network turistikrota --secret jwt_private_key --secret jwt_public_key --env-file .env --publish 6019:6019 api.turistikrota.com/place:latest
 ```
