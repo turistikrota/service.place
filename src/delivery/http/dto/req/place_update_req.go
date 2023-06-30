@@ -10,12 +10,12 @@ import (
 
 type PlaceUpdateRequest struct {
 	UUID         string
-	FeatureUUIDs []string                  `json:"feature_uuids" validate:"required,min=1,max=10,dive,object_id"`
+	FeatureUUIDs []string                  `json:"featureUUIDs" validate:"required,min=1,max=10,dive,object_id"`
 	Images       []PlaceImageRequest       `json:"images" validate:"required,min=1,max=10,dive,required"`
 	Coordinates  []float64                 `json:"coordinates" validate:"required,min=2,max=2,dive,required"`
-	TimeSpent    PlaceTimeSpentRequest     `json:"time_spent" validate:"required,dive,required"`
+	TimeSpent    PlaceTimeSpentRequest     `json:"timeSpent" validate:"required,dive,required"`
 	Translations []PlaceTranslationRequest `json:"translations" validate:"required,min=1,max=3,dive,required"`
-	IsPayed      *bool                     `json:"is_payed" validate:"required"`
+	IsPayed      *bool                     `json:"isPayed" validate:"required"`
 }
 
 func (r *PlaceUpdateRequest) Load(req *PlaceDetailRequest) *PlaceUpdateRequest {
