@@ -108,9 +108,10 @@ func NewApplication(cnf Config) app.Application {
 				CqrsBase: base,
 			}),
 			PlaceView: query.NewPlaceViewHandler(query.PlaceViewHandlerConfig{
-				Repo:     placeRepo,
-				CacheSrv: cnf.CacheSrv,
-				CqrsBase: base,
+				Repo:        placeRepo,
+				FeatureRepo: featureRepo,
+				CacheSrv:    cnf.CacheSrv,
+				CqrsBase:    base,
 			}),
 		},
 	}
