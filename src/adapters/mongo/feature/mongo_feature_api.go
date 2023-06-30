@@ -22,7 +22,7 @@ func (r *repo) Create(ctx context.Context, e *feature.Entity) *i18np.Error {
 }
 
 func (r *repo) Update(ctx context.Context, uuid string, e *feature.Entity) *i18np.Error {
-	id, err := mongo.TransformId(e.UUID)
+	id, err := mongo.TransformId(uuid)
 	if err != nil {
 		return r.factory.Errors.InvalidUUID("update")
 	}
