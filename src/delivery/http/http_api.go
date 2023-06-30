@@ -14,7 +14,10 @@ func (h Server) FeatureCreate(ctx *fiber.Ctx) error {
 }
 
 func (h Server) FeatureUpdate(ctx *fiber.Ctx) error {
-	return nil
+	d := dto.Request.FeatureUpdate()
+	h.parseBody(ctx, d)
+	_, err := h.app.Commands.FeatureUpdate.Handle(ctx.UserContext(), d.ToCommand())
+	return result.IfSuccess(err, ctx, h.i18n, Messages.Success.FeatureUpdate)
 }
 
 func (h Server) FeatureDelete(ctx *fiber.Ctx) error {
