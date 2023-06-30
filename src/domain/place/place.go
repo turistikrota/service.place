@@ -36,7 +36,7 @@ type Translations struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	Slug        string `json:"slug"`
-	MarkdownURL string `json:"markdown_url"`
+	MarkdownURL string `json:"markdownUrl"`
 	Seo         Seo    `json:"seo"`
 }
 

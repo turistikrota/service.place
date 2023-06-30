@@ -180,7 +180,6 @@ func (r *repo) viewOptions() *options.FindOneOptions {
 func (r *repo) filterOptions(listConfig list.Config) *options.FindOptions {
 	opts := &options.FindOptions{}
 	opts.SetProjection(bson.M{
-		entity.Fields.FeatureUUIDs:     1,
 		entity.Fields.Images:           1,
 		entity.Fields.Translations:     1,
 		entity.Fields.AverageTimeSpent: 1,
