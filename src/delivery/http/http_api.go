@@ -16,7 +16,10 @@ func (h Server) FeatureCreate(ctx *fiber.Ctx) error {
 }
 
 func (h Server) FeatureUpdate(ctx *fiber.Ctx) error {
+	detail := dto.Request.FeatureDetail()
 	d := dto.Request.FeatureUpdate()
+	h.parseParams(ctx, detail)
+	d.Load(detail)
 	h.parseBody(ctx, d)
 	_, err := h.app.Commands.FeatureUpdate.Handle(ctx.UserContext(), d.ToCommand())
 	return result.IfSuccess(err, ctx, h.i18n, Messages.Success.FeatureUpdate)
@@ -58,7 +61,10 @@ func (h Server) PlaceCreate(ctx *fiber.Ctx) error {
 }
 
 func (h Server) PlaceUpdate(ctx *fiber.Ctx) error {
+	detail := dto.Request.PlaceDetail()
 	d := dto.Request.PlaceUpdate()
+	h.parseParams(ctx, detail)
+	d.Load(detail)
 	h.parseBody(ctx, d)
 	_, err := h.app.Commands.PlaceUpdate.Handle(ctx.UserContext(), d.ToCommand())
 	return result.IfSuccess(err, ctx, h.i18n, Messages.Success.PlaceUpdate)

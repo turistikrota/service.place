@@ -6,12 +6,19 @@ import (
 )
 
 type FeatureUpdateRequest struct {
+	UUID         string
 	Icon         string                      `json:"icon" validate:"required,min=1,max=255"`
 	Translations []FeatureTranslationRequest `json:"translations" validate:"min=1,max=3,dive,required"`
 }
 
+func (r *FeatureUpdateRequest) Load(req *FeatureDetailRequest) *FeatureUpdateRequest {
+	r.UUID = req.UUID
+	return r
+}
+
 func (r *FeatureUpdateRequest) ToCommand() command.FeatureUpdateCommand {
 	return command.FeatureUpdateCommand{
+		UUID:         r.UUID,
 		Icon:         r.Icon,
 		Translations: r.toTranslations(),
 	}

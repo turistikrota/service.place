@@ -58,6 +58,26 @@ func New(config Config) Server {
 func (h Server) Load(router fiber.Router) fiber.Router {
 	router.Use(h.cors(), h.deviceUUID())
 
+	feature := router.Group("/feature")
+
+	feature.Get("/", h.wrapWithTimeout(h.FeatureList))
+	featureAdmin := feature.Group("/", h.currentUserAccess(), h.adminRoute())
+	featureAdmin.Post("/", h.wrapWithTimeout(h.FeatureCreate))
+	featureAdmin.Put("/:uuid/disable", h.wrapWithTimeout(h.FeatureDisable))
+	featureAdmin.Put("/:uuid/enable", h.wrapWithTimeout(h.FeatureEnable))
+	featureAdmin.Put("/:uuid", h.wrapWithTimeout(h.FeatureUpdate))
+	featureAdmin.Delete("/:uuid", h.wrapWithTimeout(h.FeatureDelete))
+
+	placeAdmin := router.Group("/place", h.currentUserAccess(), h.adminRoute())
+	placeAdmin.Post("/", h.wrapWithTimeout(h.PlaceCreate))
+	placeAdmin.Put("/:uuid/disable", h.wrapWithTimeout(h.PlaceDisable))
+	placeAdmin.Put("/:uuid/enable", h.wrapWithTimeout(h.PlaceEnable))
+	placeAdmin.Put("/:uuid", h.wrapWithTimeout(h.PlaceUpdate))
+	placeAdmin.Delete("/:uuid", h.wrapWithTimeout(h.PlaceDelete))
+
+	router.Post("/", h.wrapWithTimeout(h.PlaceFilter))
+	router.Get("/:slug", h.wrapWithTimeout(h.PlaceView))
+
 	return router
 }
 
