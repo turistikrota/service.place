@@ -150,6 +150,7 @@ func (r *repo) filterToBson(filter place.EntityFilter) bson.M {
 	list = r.filterIsPayed(list, filter)
 	list = r.filterTimeSpent(list, filter)
 	list = r.filterReview(list, filter)
+	list = r.filterByTypes(list, filter)
 	listLen := len(list)
 	if listLen == 0 {
 		return bson.M{}
@@ -172,6 +173,7 @@ func (r *repo) viewOptions() *options.FindOneOptions {
 		entity.Fields.Review:           1,
 		entity.Fields.IsPayed:          1,
 		entity.Fields.CreatedAt:        1,
+		entity.Fields.Type:             1,
 		entity.Fields.Coordinates:      1,
 	})
 	return opts
@@ -185,6 +187,7 @@ func (r *repo) filterOptions(listConfig list.Config) *options.FindOptions {
 		entity.Fields.AverageTimeSpent: 1,
 		entity.Fields.Review:           1,
 		entity.Fields.IsPayed:          1,
+		entity.Fields.Type:             1,
 		entity.Fields.Coordinates:      1,
 	}).SetSkip(listConfig.Offset).SetLimit(listConfig.Limit)
 	return opts

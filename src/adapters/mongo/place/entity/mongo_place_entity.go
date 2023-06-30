@@ -18,6 +18,7 @@ type (
 		IsActive         bool                        `bson:"is_active"`
 		IsDeleted        bool                        `bson:"is_deleted"`
 		IsPayed          bool                        `bson:"is_payed"`
+		Type             string                      `bson:"type"`
 		UpdatedAt        time.Time                   `bson:"updated_at"`
 		CreatedAt        time.Time                   `bson:"created_at"`
 	}
@@ -57,6 +58,7 @@ func (e *MongoPlace) FromEntity(entity *place.Entity) *MongoPlace {
 	e.Coordinates = entity.Coordinates
 	e.IsDeleted = entity.IsDeleted
 	e.IsPayed = entity.IsPayed
+	e.Type = entity.Type.String()
 	t := time.Now()
 	e.UpdatedAt = t
 	e.CreatedAt = t
@@ -73,6 +75,7 @@ func (e *MongoPlace) FromEntityUpdate(entity *place.Entity) *MongoPlace {
 	e.IsDeleted = entity.IsDeleted
 	e.Coordinates = entity.Coordinates
 	e.IsPayed = entity.IsPayed
+	e.Type = entity.Type.String()
 	e.UpdatedAt = time.Now()
 	return e
 }
@@ -85,6 +88,7 @@ func (e *MongoPlace) ToListEntity() *place.Entity {
 		AverageTimeSpent: e.toTimeSpent(),
 		Coordinates:      e.Coordinates,
 		Review:           e.toReview(),
+		Type:             place.Type(e.Type),
 		IsPayed:          e.IsPayed,
 	}
 }
@@ -100,6 +104,7 @@ func (e *MongoPlace) ToAdminListEntity() *place.Entity {
 		Coordinates:      e.Coordinates,
 		IsPayed:          e.IsPayed,
 		IsActive:         e.IsActive,
+		Type:             place.Type(e.Type),
 		IsDeleted:        e.IsDeleted,
 	}
 }
@@ -113,6 +118,7 @@ func (e *MongoPlace) ToViewEntity() *place.Entity {
 		Review:           e.toReview(),
 		Coordinates:      e.Coordinates,
 		IsPayed:          e.IsPayed,
+		Type:             place.Type(e.Type),
 		CreatedAt:        e.CreatedAt,
 	}
 }
@@ -128,6 +134,7 @@ func (e *MongoPlace) ToAdminViewEntity() *place.Entity {
 		IsPayed:          e.IsPayed,
 		Coordinates:      e.Coordinates,
 		IsActive:         e.IsActive,
+		Type:             place.Type(e.Type),
 		IsDeleted:        e.IsDeleted,
 		UpdatedAt:        e.UpdatedAt,
 		CreatedAt:        e.CreatedAt,

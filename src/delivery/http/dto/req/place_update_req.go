@@ -16,6 +16,7 @@ type PlaceUpdateRequest struct {
 	TimeSpent    PlaceTimeSpentRequest     `json:"timeSpent" validate:"required,dive,required"`
 	Translations []PlaceTranslationRequest `json:"translations" validate:"required,min=1,max=3,dive,required"`
 	IsPayed      *bool                     `json:"isPayed" validate:"required"`
+	Type         string                    `json:"type" validate:"required,oneof=eating coffee bar beach amaze"`
 }
 
 func (r *PlaceUpdateRequest) Load(req *PlaceDetailRequest) *PlaceUpdateRequest {
@@ -32,6 +33,7 @@ func (r *PlaceUpdateRequest) ToCommand() command.PlaceUpdateCommand {
 		Coordinates:      r.Coordinates,
 		IsPayed:          r.toIsPayed(),
 		UUID:             r.UUID,
+		Type:             place.Type(r.Type),
 	}
 }
 

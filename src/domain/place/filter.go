@@ -10,6 +10,7 @@ type EntityFilter struct {
 	IsPayed          *bool
 	MinReview        *int16
 	MaxReview        *int16
+	Types            []Type
 	MinAveragePoint  *float32
 	MaxAveragePoint  *float32
 }

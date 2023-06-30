@@ -17,6 +17,7 @@ type (
 		AverageTimeSpent place.TimeSpent
 		Coordinates      []float64
 		IsPayed          bool
+		Type             place.Type
 	}
 	PlaceCreateResult  struct{}
 	PlaceCreateHandler decorator.CommandHandler[PlaceCreateCommand, *PlaceCreateResult]

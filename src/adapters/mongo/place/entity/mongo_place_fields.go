@@ -13,6 +13,7 @@ type fields struct {
 	UpdatedAt        string
 	CreatedAt        string
 	Coordinates      string
+	Type             string
 }
 
 type translationFields struct {
@@ -57,6 +58,7 @@ var Fields = fields{
 	UpdatedAt:        "updated_at",
 	CreatedAt:        "created_at",
 	Coordinates:      "coordinates",
+	Type:             "type",
 }
 
 var TranslationFields = translationFields{

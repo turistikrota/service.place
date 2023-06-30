@@ -15,6 +15,17 @@ func (r *repo) baseFilter() bson.M {
 	}
 }
 
+func (r *repo) filterByTypes(list []bson.M, filter place.EntityFilter) []bson.M {
+	if len(filter.Types) > 0 {
+		list = append(list, bson.M{
+			entity.Fields.Type: bson.M{
+				"$in": filter.Types,
+			},
+		})
+	}
+	return list
+}
+
 func (r *repo) filterByQuery(list []bson.M, filter place.EntityFilter) []bson.M {
 	if filter.Query != "" {
 		list = append(list, bson.M{

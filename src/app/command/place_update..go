@@ -18,6 +18,7 @@ type (
 		AverageTimeSpent place.TimeSpent
 		Coordinates      []float64
 		IsPayed          bool
+		Type             place.Type
 	}
 	PlaceUpdateResult  struct{}
 	PlaceUpdateHandler decorator.CommandHandler[PlaceUpdateCommand, *PlaceUpdateResult]
@@ -60,6 +61,7 @@ func (h placeUpdateHandler) Handle(ctx context.Context, command PlaceUpdateComma
 		AverageTimeSpent: command.AverageTimeSpent,
 		Coordinates:      command.Coordinates,
 		IsPayed:          command.IsPayed,
+		Type:             command.Type,
 	})
 	err = h.repo.Update(ctx, command.UUID, p)
 	if err != nil {

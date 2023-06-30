@@ -21,6 +21,7 @@ type NewConfig struct {
 	AverageTimeSpent TimeSpent
 	Coordinates      []float64
 	IsPayed          bool
+	Type             Type
 }
 
 func (f Factory) New(config NewConfig) *Entity {
@@ -37,5 +38,6 @@ func (f Factory) New(config NewConfig) *Entity {
 		IsPayed:     config.IsPayed,
 		IsActive:    true,
 		IsDeleted:   false,
+		Type:        config.Type,
 	}
 }

@@ -13,6 +13,7 @@ type Entity struct {
 	IsActive         bool                    `json:"is_active"`
 	IsDeleted        bool                    `json:"is_deleted"`
 	IsPayed          bool                    `json:"is_payed"`
+	Type             Type                    `json:"type"`
 	UpdatedAt        time.Time               `json:"updated_at"`
 	CreatedAt        time.Time               `json:"created_at"`
 }
@@ -55,4 +56,22 @@ const (
 
 func (l Locale) String() string {
 	return string(l)
+}
+
+type Type string
+
+const (
+	TypeEating Type = "eating"
+	TypeCoffee Type = "coffee"
+	TypeBar    Type = "bar"
+	TypeBeach  Type = "beach"
+	TypeAmaze  Type = "amaze"
+)
+
+func (t Type) String() string {
+	return string(t)
+}
+
+func (t Type) IsType() bool {
+	return t == TypeEating || t == TypeCoffee || t == TypeBar || t == TypeBeach || t == TypeAmaze
 }

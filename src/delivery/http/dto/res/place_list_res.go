@@ -21,6 +21,7 @@ type PlaceFilterChild struct {
 	Review           place.Review                  `json:"review"`
 	Coordinates      []float64                     `json:"coordinates"`
 	IsPayed          bool                          `json:"isPayed"`
+	Type             place.Type                    `json:"type"`
 }
 
 type Translations struct {
@@ -50,6 +51,7 @@ func (r *response) placeListChild(list []*place.Entity) []PlaceFilterChild {
 			Review:           v.Review,
 			Coordinates:      v.Coordinates,
 			IsPayed:          v.IsPayed,
+			Type:             v.Type,
 		}
 	}
 	return res

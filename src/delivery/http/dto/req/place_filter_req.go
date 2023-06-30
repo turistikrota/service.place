@@ -18,6 +18,7 @@ type PlaceFilterRequest struct {
 	MaxReview       *int16                       `json:"max_review,omitempty" validate:"omitempty,gt=0"`
 	MinAveragePoint *float32                     `json:"min_average_point,omitempty" validate:"omitempty,gt=0"`
 	MaxAveragePoint *float32                     `json:"max_average_point,omitempty" validate:"omitempty,gt=0"`
+	Type            []place.Type                 `json:"type,omitempty" validate:"omitempty,dive,required"`
 }
 
 type PlaceFilterTimeSpentRequest struct {
@@ -46,6 +47,7 @@ func (r *PlaceFilterRequest) ToQuery(locale string) query.PlaceFilterQuery {
 			MinReview:        r.MinReview,
 			MaxReview:        r.MaxReview,
 			MaxAveragePoint:  r.MaxAveragePoint,
+			Types:            r.Type,
 		},
 		Offset: (r.Page - 1) * r.Limit,
 		Limit:  r.Limit,
