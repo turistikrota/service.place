@@ -109,7 +109,7 @@ func (r *repo) Filter(ctx context.Context, filter place.EntityFilter, listConfig
 	if _err != nil {
 		return nil, _err
 	}
-	total, _err := r.helper.GetFilterCount(ctx, bson.M{})
+	total, _err := r.helper.GetFilterCount(ctx, r.baseFilter())
 	if _err != nil {
 		return nil, _err
 	}

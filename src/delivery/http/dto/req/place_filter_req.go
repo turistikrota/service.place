@@ -47,7 +47,7 @@ func (r *PlaceFilterRequest) ToQuery(locale string) query.PlaceFilterQuery {
 			MaxReview:        r.MaxReview,
 			MaxAveragePoint:  r.MaxAveragePoint,
 		},
-		Offset: r.Page * r.Limit,
+		Offset: (r.Page - 1) * r.Limit,
 		Limit:  r.Limit,
 	}
 }
