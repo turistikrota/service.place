@@ -1,8 +1,11 @@
 package req
 
 import (
+	"strings"
+
 	"api.turistikrota.com/place/src/app/command"
 	"api.turistikrota.com/place/src/domain/place"
+	"github.com/ssibrahimbas/slug"
 )
 
 type PlaceCreateRequest struct {
@@ -46,6 +49,9 @@ func (r *PlaceCreateRequest) toTranslations() map[place.Locale]place.Translation
 		translations[place.Locale(translation.Locale)] = place.Translations{
 			Title:       translation.Title,
 			Description: translation.Description,
+			Slug:        slug.New(translation.Title, slug.Lang(strings.ToUpper(translation.Locale))),
+			MarkdownURL: translation.MarkdownURL,
+			Seo:         translation.Seo.ToSeo(),
 		}
 	}
 	return translations

@@ -16,7 +16,6 @@ type PlaceTranslationRequest struct {
 	Title       string                     `json:"title" validate:"required,min=1,max=255"`
 	Description string                     `json:"description" validate:"required,min=1,max=255"`
 	Locale      string                     `json:"locale" validate:"required,min=1,max=255"`
-	Slug        string                     `json:"slug" validate:"required,min=1,max=255"`
 	MarkdownURL string                     `json:"markdown_url" validate:"required,min=1,max=255"`
 	Seo         PlaceTranslationSeoRequest `json:"seo" validate:"required,dive,required"`
 }
