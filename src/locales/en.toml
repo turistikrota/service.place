@@ -17,6 +17,7 @@ validation_datetime = "This field must be a valid datetime."
 validation_ltfield = "The {{.Field}} must be less than {{.Param}}."
 validation_lt = "The {{.Field}} must be less than {{.Param}}."
 validation_gt = "The {{.Field}} must be greater than {{.Param}}."
+validation_url = "This field must be a valid url."
 
 error_invalid_request_body = "Invalid request body."
 error_invalid_request_query = "Invalid request query."

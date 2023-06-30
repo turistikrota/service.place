@@ -17,6 +17,7 @@ validation_datetime = "Bu alan geçerli bir tarih ve saat olmalıdır."
 validation_ltfield = "{{.Field}} alanı {{.Param}} alanından küçük olmalıdır."
 validation_lt = "{{.Field}} alanı {{.Param}} değerinden küçük olmalıdır."
 validation_gt = "{{.Field}} alanı {{.Param}} değerinden büyük olmalıdır."
+validation_url = "Bu alan geçerli bir URL olmalıdır."
 
 error_invalid_request_body = "İstek gövdesi geçersiz."
 error_invalid_request_query = "İstek sorgusu geçersiz."
