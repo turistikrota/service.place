@@ -8,7 +8,7 @@ import (
 
 type (
 	MongoPlace struct {
-		UUID             string                      `bson:"_id"`
+		UUID             string                      `bson:"_id,omitempty"`
 		FeatureUUIDs     []string                    `bson:"feature_uuids"`
 		Images           []MongoImage                `bson:"images"`
 		Translations     map[string]MongoTranslation `bson:"translations"`

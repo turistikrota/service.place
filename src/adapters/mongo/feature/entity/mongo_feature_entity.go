@@ -7,7 +7,7 @@ import (
 )
 
 type MongoFeature struct {
-	UUID         string                       `bson:"_id"`
+	UUID         string                       `bson:"_id,omitempty"`
 	Icon         string                       `bson:"icon"`
 	Translations map[string]MongoTranslations `bson:"translations"`
 	IsActive     bool                         `bson:"is_active"`
