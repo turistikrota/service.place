@@ -4,26 +4,32 @@ import "github.com/turistikrota/service.shared/base_roles"
 
 type roles struct {
 	base_roles.Roles
-	PlatformViewDetail        string
-	PlatformCreate            string
-	PlatformUpdate            string
-	PlatformDelete            string
-	PlatformEnable            string
-	PlatformDisable           string
-	PlatformTranslationAdd    string
-	PlatformTranslationUpdate string
-	PlatformTranslationDelete string
+	FeatureAll     string
+	FeatureCreate  string
+	FeatureUpdate  string
+	FeatureDelete  string
+	FeatureEnable  string
+	FeatureDisable string
+	PlaceAll       string
+	PlaceCreate    string
+	PlaceUpdate    string
+	PlaceDelete    string
+	PlaceEnable    string
+	PlaceDisable   string
 }
 
 var Roles = roles{
-	Roles:                     base_roles.BaseRoles,
-	PlatformViewDetail:        "platform.view.detail",
-	PlatformCreate:            "platform.create",
-	PlatformUpdate:            "platform.update",
-	PlatformDelete:            "platform.delete",
-	PlatformEnable:            "platform.enable",
-	PlatformDisable:           "platform.disable",
-	PlatformTranslationAdd:    "platform.translation.add",
-	PlatformTranslationUpdate: "platform.translation.update",
-	PlatformTranslationDelete: "platform.translation.delete",
+	Roles:          base_roles.BaseRoles,
+	FeatureAll:     "feature.all",
+	FeatureCreate:  "feature.create",
+	FeatureUpdate:  "feature.update",
+	FeatureDelete:  "feature.delete",
+	FeatureEnable:  "feature.enable",
+	FeatureDisable: "feature.disable",
+	PlaceAll:       "place.all",
+	PlaceCreate:    "place.create",
+	PlaceUpdate:    "place.update",
+	PlaceDelete:    "place.delete",
+	PlaceEnable:    "place.enable",
+	PlaceDisable:   "place.disable",
 }
