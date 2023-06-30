@@ -9,6 +9,7 @@ type Request interface {
 	PlaceFilter() *PlaceFilterRequest
 	PlaceCreate() *PlaceCreateRequest
 	PlaceUpdate() *PlaceUpdateRequest
+	PlaceView() *PlaceViewRequest
 }
 
 type request struct{}
@@ -47,4 +48,8 @@ func (r *request) PlaceCreate() *PlaceCreateRequest {
 
 func (r *request) PlaceUpdate() *PlaceUpdateRequest {
 	return &PlaceUpdateRequest{}
+}
+
+func (r *request) PlaceView() *PlaceViewRequest {
+	return &PlaceViewRequest{}
 }

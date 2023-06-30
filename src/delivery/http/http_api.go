@@ -4,6 +4,7 @@ import (
 	"api.turistikrota.com/place/src/app/query"
 	"api.turistikrota.com/place/src/delivery/http/dto"
 	"github.com/gofiber/fiber/v2"
+	httpI18n "github.com/turistikrota/service.shared/server/http/i18n"
 	"github.com/turistikrota/service.shared/server/http/result"
 )
 
@@ -50,29 +51,59 @@ func (h Server) FeatureList(ctx *fiber.Ctx) error {
 }
 
 func (h Server) PlaceCreate(ctx *fiber.Ctx) error {
-	return nil
+	d := dto.Request.PlaceCreate()
+	h.parseBody(ctx, d)
+	_, err := h.app.Commands.PlaceCreate.Handle(ctx.UserContext(), d.ToCommand())
+	return result.IfSuccess(err, ctx, h.i18n, Messages.Success.PlaceCreate)
 }
 
 func (h Server) PlaceUpdate(ctx *fiber.Ctx) error {
-	return nil
+	d := dto.Request.PlaceUpdate()
+	h.parseBody(ctx, d)
+	_, err := h.app.Commands.PlaceUpdate.Handle(ctx.UserContext(), d.ToCommand())
+	return result.IfSuccess(err, ctx, h.i18n, Messages.Success.PlaceUpdate)
 }
 
 func (h Server) PlaceDelete(ctx *fiber.Ctx) error {
-	return nil
+	detail := dto.Request.PlaceDetail()
+	h.parseParams(ctx, detail)
+	_, err := h.app.Commands.PlaceDelete.Handle(ctx.UserContext(), detail.ToDeleteCommand())
+	return result.IfSuccess(err, ctx, h.i18n, Messages.Success.PlaceDelete)
 }
 
 func (h Server) PlaceDisable(ctx *fiber.Ctx) error {
-	return nil
+	detail := dto.Request.PlaceDetail()
+	h.parseParams(ctx, detail)
+	_, err := h.app.Commands.PlaceDisable.Handle(ctx.UserContext(), detail.ToDisableCommand())
+	return result.IfSuccess(err, ctx, h.i18n, Messages.Success.PlaceDisable)
 }
 
 func (h Server) PlaceEnable(ctx *fiber.Ctx) error {
-	return nil
+	detail := dto.Request.PlaceDetail()
+	h.parseParams(ctx, detail)
+	_, err := h.app.Commands.PlaceEnable.Handle(ctx.UserContext(), detail.ToEnableCommand())
+	return result.IfSuccess(err, ctx, h.i18n, Messages.Success.PlaceEnable)
 }
 
 func (h Server) PlaceFilter(ctx *fiber.Ctx) error {
-	return nil
+	p := dto.Request.Pagination()
+	d := dto.Request.PlaceFilter()
+	h.parseQuery(ctx, p)
+	d.LoadPagination(p)
+	h.parseBody(ctx, d)
+	l, _ := httpI18n.GetLanguagesInContext(h.i18n, ctx)
+	res, err := h.app.Queries.PlaceFilter.Handle(ctx.UserContext(), d.ToQuery(l))
+	return result.IfSuccessDetail(err, ctx, h.i18n, Messages.Success.PlaceFilter, func() interface{} {
+		return dto.Response.PlaceList(res)
+	})
 }
 
 func (h Server) PlaceView(ctx *fiber.Ctx) error {
-	return nil
+	p := dto.Request.PlaceView()
+	h.parseParams(ctx, p)
+	l, _ := httpI18n.GetLanguagesInContext(h.i18n, ctx)
+	res, err := h.app.Queries.PlaceView.Handle(ctx.UserContext(), p.ToQuery(l))
+	return result.IfSuccessDetail(err, ctx, h.i18n, Messages.Success.PlaceView, func() interface{} {
+		return dto.Response.PlaceView(res)
+	})
 }
