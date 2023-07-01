@@ -10,15 +10,15 @@ type PlaceFilterRequest struct {
 	Limit           int64
 	Query           string                       `json:"query,omitempty" validate:"omitempty,max=100"`
 	Coordinates     []float64                    `json:"coordinates,omitempty" validate:"omitempty,min=2,max=2"`
-	FeatureUUIDs    []string                     `json:"feature_uuids,omitempty" validate:"omitempty,min=1,max=10,dive,object_id"`
-	TimeSpent       *PlaceFilterTimeSpentRequest `json:"time_spent,omitempty" validate:"omitempty,dive,required"`
+	FeatureUUIDs    []string                     `json:"featureUUIDs,omitempty" validate:"omitempty,min=1,max=10,dive,object_id"`
+	TimeSpent       *PlaceFilterTimeSpentRequest `json:"timeSpent,omitempty" validate:"omitempty,dive,required"`
 	Distance        float64                      `json:"distance,omitempty" validate:"omitempty,gt=0"`
-	IsPayed         *bool                        `json:"is_payed,omitempty" validate:"omitempty"`
-	MinReview       *int16                       `json:"min_review,omitempty" validate:"omitempty,gt=0"`
-	MaxReview       *int16                       `json:"max_review,omitempty" validate:"omitempty,gt=0"`
-	MinAveragePoint *float32                     `json:"min_average_point,omitempty" validate:"omitempty,gt=0"`
-	MaxAveragePoint *float32                     `json:"max_average_point,omitempty" validate:"omitempty,gt=0"`
-	Type            []place.Type                 `json:"type,omitempty" validate:"omitempty,dive,required"`
+	IsPayed         *bool                        `json:"isPayed,omitempty" validate:"omitempty"`
+	MinReview       *int16                       `json:"minReview,omitempty" validate:"omitempty,gt=0"`
+	MaxReview       *int16                       `json:"maxReview,omitempty" validate:"omitempty,gt=0"`
+	MinAveragePoint *float32                     `json:"minAveragePoint,omitempty" validate:"omitempty,gt=0"`
+	MaxAveragePoint *float32                     `json:"maxAveragePoint,omitempty" validate:"omitempty,gt=0"`
+	Type            []place.Type                 `json:"types,omitempty" validate:"omitempty,dive,required"`
 }
 
 type PlaceFilterTimeSpentRequest struct {

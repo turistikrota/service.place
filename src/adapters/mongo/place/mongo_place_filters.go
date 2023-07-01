@@ -52,7 +52,7 @@ func (r *repo) filterByLocation(list []bson.M, filter place.EntityFilter) []bson
 	if filter.Coordinates != nil && len(filter.Coordinates) == 2 {
 		distance := filter.Distance
 		if distance == 0 {
-			distance = 1000
+			distance = 100000 // 100 km
 		}
 		list = append(list, bson.M{
 			entity.Fields.Coordinates: bson.M{
