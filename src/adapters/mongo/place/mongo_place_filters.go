@@ -4,6 +4,7 @@ import (
 	"api.turistikrota.com/place/src/adapters/mongo/place/entity"
 	"api.turistikrota.com/place/src/domain/place"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func (r *repo) baseFilter() bson.M {
@@ -125,4 +126,24 @@ func (r *repo) filterFeatureUUIDs(list []bson.M, filter place.EntityFilter) []bs
 		})
 	}
 	return list
+}
+
+func (r *repo) sort(opts *options.FindOptions, filter place.EntityFilter) *options.FindOptions {
+	order := -1
+	if filter.Order == place.OrderAsc {
+		order = 1
+	}
+	field := entity.Fields.CreatedAt
+	switch filter.Sort {
+	case place.SortByMostLiked:
+		field = entity.ReviewField(entity.ReviewFields.AveragePoint)
+	case place.SortByMostPopular:
+		field = entity.ReviewField(entity.ReviewFields.Total)
+	case place.SortByMostRecent:
+		field = entity.Fields.CreatedAt
+	case place.SortByNearest:
+		field = entity.Fields.Coordinates
+	}
+	opts.SetSort(bson.D{{Key: field, Value: order}})
+	return opts
 }

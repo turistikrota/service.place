@@ -13,6 +13,8 @@ type EntityFilter struct {
 	Types            []Type
 	MinAveragePoint  *float32
 	MaxAveragePoint  *float32
+	Sort             Sort
+	Order            Order
 }
 
 func (e *EntityFilter) IsZero() bool {
@@ -27,4 +29,33 @@ func (e *EntityFilter) IsZero() bool {
 		e.MaxReview == nil &&
 		e.MinAveragePoint == nil &&
 		e.MaxAveragePoint == nil
+}
+
+type (
+	Sort  string
+	Order string
+)
+
+const (
+	SortByMostPopular Sort = "most_popular"
+	SortByMostLiked   Sort = "most_liked"
+	SortByMostRecent  Sort = "most_recent"
+	SortByNearest     Sort = "nearest"
+)
+
+const (
+	OrderAsc  Order = "asc"
+	OrderDesc Order = "desc"
+)
+
+func (s Sort) IsValid() bool {
+	return s == SortByMostPopular ||
+		s == SortByMostLiked ||
+		s == SortByMostRecent ||
+		s == SortByNearest
+}
+
+func (o Order) IsValid() bool {
+	return o == OrderAsc ||
+		o == OrderDesc
 }

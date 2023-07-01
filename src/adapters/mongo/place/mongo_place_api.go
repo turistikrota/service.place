@@ -101,7 +101,7 @@ func (r *repo) Filter(ctx context.Context, filter place.EntityFilter, listConfig
 	transformer := func(e *entity.MongoPlace) *place.Entity {
 		return e.ToListEntity()
 	}
-	l, err := r.helper.GetListFilterTransform(ctx, anyFilter, transformer, r.filterOptions(listConfig))
+	l, err := r.helper.GetListFilterTransform(ctx, anyFilter, transformer, r.sort(r.filterOptions(listConfig), filter))
 	if err != nil {
 		return nil, err
 	}
