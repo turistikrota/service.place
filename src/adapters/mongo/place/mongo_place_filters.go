@@ -56,12 +56,11 @@ func (r *repo) filterByLocation(list []bson.M, filter place.EntityFilter) []bson
 		}
 		list = append(list, bson.M{
 			entity.Fields.Coordinates: bson.M{
-				"$near": bson.M{
-					"$geometry": bson.M{
-						"type":        "Point",
-						"coordinates": filter.Coordinates,
+				"$geoWithin": bson.M{
+					"$centerSphere": []interface{}{
+						filter.Coordinates,
+						distance / 6378.1, // 6378.1 is the radius of the earth in km
 					},
-					"$maxDistance": distance,
 				},
 			},
 		})
