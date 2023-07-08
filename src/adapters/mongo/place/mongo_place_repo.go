@@ -1,8 +1,8 @@
 package place
 
 import (
-	"api.turistikrota.com/place/src/adapters/mongo/place/entity"
-	"api.turistikrota.com/place/src/domain/place"
+	"github.com/turistikrota/service.place/src/adapters/mongo/place/entity"
+	"github.com/turistikrota/service.place/src/domain/place"
 	mongo2 "github.com/turistikrota/service.shared/db/mongo"
 	"go.mongodb.org/mongo-driver/mongo"
 )

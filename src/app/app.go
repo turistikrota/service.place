@@ -1,8 +1,8 @@
 package app
 
 import (
-	"api.turistikrota.com/place/src/app/command"
-	"api.turistikrota.com/place/src/app/query"
+	"github.com/turistikrota/service.place/src/app/command"
+	"github.com/turistikrota/service.place/src/app/query"
 )
 
 type Application struct {

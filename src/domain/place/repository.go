@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/mixarchitecture/i18np"
-	"github.com/turistikrota/service.shared/types/list"
+	"github.com/mixarchitecture/microp/types/list"
 )
 
 type I18nDetail struct {

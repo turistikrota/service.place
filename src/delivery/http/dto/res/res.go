@@ -1,6 +1,6 @@
 package res
 
-import "api.turistikrota.com/place/src/app/query"
+import "github.com/turistikrota/service.place/src/app/query"
 
 type Response interface {
 	PlaceView(res *query.PlaceViewResult) *PlaceViewResponse

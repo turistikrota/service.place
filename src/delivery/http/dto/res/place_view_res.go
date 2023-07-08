@@ -3,8 +3,8 @@ package res
 import (
 	"time"
 
-	"api.turistikrota.com/place/src/app/query"
-	"api.turistikrota.com/place/src/domain/place"
+	"github.com/turistikrota/service.place/src/app/query"
+	"github.com/turistikrota/service.place/src/domain/place"
 )
 
 type PlaceViewResponse struct {

@@ -1,8 +1,8 @@
 package req
 
 import (
-	"api.turistikrota.com/place/src/app/command"
-	"api.turistikrota.com/place/src/domain/feature"
+	"github.com/turistikrota/service.place/src/app/command"
+	"github.com/turistikrota/service.place/src/domain/feature"
 )
 
 type FeatureCreateRequest struct {

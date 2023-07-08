@@ -3,10 +3,10 @@ package command
 import (
 	"context"
 
-	"api.turistikrota.com/place/src/domain/feature"
-	"api.turistikrota.com/place/src/domain/place"
 	"github.com/mixarchitecture/i18np"
-	"github.com/turistikrota/service.shared/decorator"
+	"github.com/mixarchitecture/microp/decorator"
+	"github.com/turistikrota/service.place/src/domain/feature"
+	"github.com/turistikrota/service.place/src/domain/place"
 )
 
 type (

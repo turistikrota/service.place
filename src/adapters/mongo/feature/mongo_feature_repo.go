@@ -1,8 +1,8 @@
 package feature
 
 import (
-	"api.turistikrota.com/place/src/adapters/mongo/feature/entity"
-	"api.turistikrota.com/place/src/domain/feature"
+	"github.com/turistikrota/service.place/src/adapters/mongo/feature/entity"
+	"github.com/turistikrota/service.place/src/domain/feature"
 	mongo2 "github.com/turistikrota/service.shared/db/mongo"
 	"go.mongodb.org/mongo-driver/mongo"
 )
