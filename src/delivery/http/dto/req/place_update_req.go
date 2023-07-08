@@ -3,9 +3,9 @@ package req
 import (
 	"strings"
 
-	"api.turistikrota.com/place/src/app/command"
-	"api.turistikrota.com/place/src/domain/place"
 	"github.com/ssibrahimbas/slug"
+	"github.com/turistikrota/service.place/src/app/command"
+	"github.com/turistikrota/service.place/src/domain/place"
 )
 
 type PlaceUpdateRequest struct {

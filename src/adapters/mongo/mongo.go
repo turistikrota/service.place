@@ -1,10 +1,10 @@
 package mongo
 
 import (
-	mongo_feature "api.turistikrota.com/place/src/adapters/mongo/feature"
-	mongo_place "api.turistikrota.com/place/src/adapters/mongo/place"
-	"api.turistikrota.com/place/src/domain/feature"
-	"api.turistikrota.com/place/src/domain/place"
+	mongo_feature "github.com/turistikrota/service.place/src/adapters/mongo/feature"
+	mongo_place "github.com/turistikrota/service.place/src/adapters/mongo/place"
+	"github.com/turistikrota/service.place/src/domain/feature"
+	"github.com/turistikrota/service.place/src/domain/place"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 

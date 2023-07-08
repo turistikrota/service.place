@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	"api.turistikrota.com/place/src/adapters/mongo/place/entity"
-	"api.turistikrota.com/place/src/domain/place"
 	"github.com/mixarchitecture/i18np"
+	"github.com/mixarchitecture/microp/types/list"
+	"github.com/turistikrota/service.place/src/adapters/mongo/place/entity"
+	"github.com/turistikrota/service.place/src/domain/place"
 	"github.com/turistikrota/service.shared/db/mongo"
-	"github.com/turistikrota/service.shared/types/list"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )

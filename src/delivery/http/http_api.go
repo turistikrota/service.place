@@ -1,11 +1,11 @@
 package http
 
 import (
-	"api.turistikrota.com/place/src/app/query"
-	"api.turistikrota.com/place/src/delivery/http/dto"
 	"github.com/gofiber/fiber/v2"
-	httpI18n "github.com/turistikrota/service.shared/server/http/i18n"
-	"github.com/turistikrota/service.shared/server/http/result"
+	httpI18n "github.com/mixarchitecture/microp/server/http/i18n"
+	"github.com/mixarchitecture/microp/server/http/result"
+	"github.com/turistikrota/service.place/src/app/query"
+	"github.com/turistikrota/service.place/src/delivery/http/dto"
 )
 
 func (h Server) FeatureCreate(ctx *fiber.Ctx) error {

@@ -5,22 +5,22 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/turistikrota/service.shared/server/http"
+	"github.com/mixarchitecture/microp/server/http/parser"
+	"github.com/mixarchitecture/microp/server/http"
 	"github.com/turistikrota/service.shared/server/http/auth"
 	"github.com/turistikrota/service.shared/server/http/auth/claim_guard"
 	"github.com/turistikrota/service.shared/server/http/auth/current_user"
 	"github.com/turistikrota/service.shared/server/http/auth/device_uuid"
 	"github.com/turistikrota/service.shared/server/http/auth/required_access"
-	"github.com/turistikrota/service.shared/server/http/parser"
 
-	"api.turistikrota.com/place/src/app"
-	"api.turistikrota.com/place/src/config"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/timeout"
 	"github.com/mixarchitecture/i18np"
+	"github.com/mixarchitecture/microp/validator"
+	"github.com/turistikrota/service.place/src/app"
+	"github.com/turistikrota/service.place/src/config"
 	"github.com/turistikrota/service.shared/auth/session"
 	"github.com/turistikrota/service.shared/auth/token"
-	"github.com/turistikrota/service.shared/validator"
 )
 
 type Server struct {

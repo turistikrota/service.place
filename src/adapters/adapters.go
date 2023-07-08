@@ -1,9 +1,9 @@
 package adapters
 
 import (
-	"api.turistikrota.com/place/src/adapters/memory"
-	"api.turistikrota.com/place/src/adapters/mongo"
-	"api.turistikrota.com/place/src/adapters/mysql"
+	"github.com/turistikrota/service.place/src/adapters/memory"
+	"github.com/turistikrota/service.place/src/adapters/mongo"
+	"github.com/turistikrota/service.place/src/adapters/mysql"
 )
 
 var (

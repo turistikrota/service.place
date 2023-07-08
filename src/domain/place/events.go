@@ -1,8 +1,8 @@
 package place
 
 import (
-	"api.turistikrota.com/place/src/config"
-	"github.com/turistikrota/service.shared/events"
+	"github.com/mixarchitecture/microp/events"
+	"github.com/turistikrota/service.place/src/config"
 )
 
 type Events interface{}

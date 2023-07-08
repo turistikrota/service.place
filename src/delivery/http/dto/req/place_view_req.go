@@ -1,6 +1,6 @@
 package req
 
-import "api.turistikrota.com/place/src/app/query"
+import "github.com/turistikrota/service.place/src/app/query"
 
 type PlaceViewRequest struct {
 	Slug string `param:"slug" validate:"required,slug"`

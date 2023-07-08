@@ -1,6 +1,6 @@
 package req
 
-import "api.turistikrota.com/place/src/domain/place"
+import "github.com/turistikrota/service.place/src/domain/place"
 
 type PlaceImageRequest struct {
 	Url   string `json:"url" validate:"required,url"`

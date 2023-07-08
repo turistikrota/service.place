@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	"api.turistikrota.com/place/src/domain/place"
 	"github.com/mixarchitecture/cache"
 	"github.com/mixarchitecture/i18np"
-	"github.com/turistikrota/service.shared/decorator"
-	"github.com/turistikrota/service.shared/types/list"
+	"github.com/mixarchitecture/microp/decorator"
+	"github.com/mixarchitecture/microp/types/list"
+	"github.com/turistikrota/service.place/src/domain/place"
 )
 
 type (

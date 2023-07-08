@@ -1,6 +1,6 @@
 package req
 
-import "api.turistikrota.com/place/src/app/command"
+import "github.com/turistikrota/service.place/src/app/command"
 
 type PlaceDetailRequest struct {
 	UUID string `param:"uuid" validate:"required,object_id"`

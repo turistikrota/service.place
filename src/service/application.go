@@ -1,18 +1,18 @@
 package service
 
 import (
-	"api.turistikrota.com/place/src/adapters"
-	"api.turistikrota.com/place/src/app"
-	"api.turistikrota.com/place/src/app/command"
-	"api.turistikrota.com/place/src/app/query"
-	"api.turistikrota.com/place/src/config"
-	"api.turistikrota.com/place/src/domain/feature"
-	"api.turistikrota.com/place/src/domain/place"
 	"github.com/mixarchitecture/cache"
+	"github.com/mixarchitecture/microp/decorator"
+	"github.com/mixarchitecture/microp/events"
+	"github.com/mixarchitecture/microp/validator"
+	"github.com/turistikrota/service.place/src/adapters"
+	"github.com/turistikrota/service.place/src/app"
+	"github.com/turistikrota/service.place/src/app/command"
+	"github.com/turistikrota/service.place/src/app/query"
+	"github.com/turistikrota/service.place/src/config"
+	"github.com/turistikrota/service.place/src/domain/feature"
+	"github.com/turistikrota/service.place/src/domain/place"
 	"github.com/turistikrota/service.shared/db/mongo"
-	"github.com/turistikrota/service.shared/decorator"
-	"github.com/turistikrota/service.shared/events"
-	"github.com/turistikrota/service.shared/validator"
 )
 
 type Config struct {
