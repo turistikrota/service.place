@@ -60,6 +60,15 @@ func (h Server) AdminFeatureList(ctx *fiber.Ctx) error {
 	})
 }
 
+func (h Server) AdminFeatureDetail(ctx *fiber.Ctx) error {
+	detail := dto.Request.FeatureDetail()
+	h.parseParams(ctx, detail)
+	res, err := h.app.Queries.AdminFeatureDetail.Handle(ctx.UserContext(), detail.ToQuery())
+	return result.IfSuccessDetail(err, ctx, h.i18n, Messages.Success.FeatureList, func() interface{} {
+		return dto.Response.AdminFeatureDetail(res)
+	})
+}
+
 func (h Server) PlaceCreate(ctx *fiber.Ctx) error {
 	d := dto.Request.PlaceCreate()
 	h.parseBody(ctx, d)

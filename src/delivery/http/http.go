@@ -68,6 +68,7 @@ func (h Server) Load(router fiber.Router) fiber.Router {
 	featureAdmin.Put("/:uuid", h.adminRoute(config.Roles.FeatureAll, config.Roles.FeatureUpdate), h.wrapWithTimeout(h.FeatureUpdate))
 	featureAdmin.Delete("/:uuid", h.adminRoute(config.Roles.FeatureAll, config.Roles.FeatureDelete), h.wrapWithTimeout(h.FeatureDelete))
 	featureAdmin.Get("/all", h.adminRoute(config.Roles.FeatureAll, config.Roles.FeatureList), h.wrapWithTimeout(h.AdminFeatureList))
+	featureAdmin.Get("/:uuid", h.adminRoute(config.Roles.FeatureAll, config.Roles.FeatureRead), h.wrapWithTimeout(h.AdminFeatureDetail))
 
 	placeAdmin := router.Group("/place", h.currentUserAccess(), h.requiredAccess())
 	placeAdmin.Post("/", h.adminRoute(config.Roles.PlaceAll, config.Roles.PlaceCreate), h.wrapWithTimeout(h.PlaceCreate))
