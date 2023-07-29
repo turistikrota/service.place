@@ -20,12 +20,12 @@ type roles struct {
 
 var Roles = roles{
 	Roles:          base_roles.BaseRoles,
-	FeatureAll:     "feature.all",
-	FeatureCreate:  "feature.create",
-	FeatureUpdate:  "feature.update",
-	FeatureDelete:  "feature.delete",
-	FeatureEnable:  "feature.enable",
-	FeatureDisable: "feature.disable",
+	FeatureAll:     "place.feature.all",
+	FeatureCreate:  "place.feature.create",
+	FeatureUpdate:  "place.feature.update",
+	FeatureDelete:  "place.feature.delete",
+	FeatureEnable:  "place.feature.enable",
+	FeatureDisable: "place.feature.disable",
 	PlaceAll:       "place.all",
 	PlaceCreate:    "place.create",
 	PlaceUpdate:    "place.update",
