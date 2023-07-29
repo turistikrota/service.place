@@ -65,6 +65,7 @@ func (r *repo) Enable(ctx context.Context, uuid string) *i18np.Error {
 	}
 	update := bson.M{
 		"$set": bson.M{
+			entity.Fields.IsDeleted: false,
 			entity.Fields.IsActive:  true,
 			entity.Fields.UpdatedAt: time.Now(),
 		},
@@ -83,6 +84,7 @@ func (r *repo) Delete(ctx context.Context, uuid string) *i18np.Error {
 	}
 	update := bson.M{
 		"$set": bson.M{
+			entity.Fields.IsActive:  false,
 			entity.Fields.IsDeleted: true,
 			entity.Fields.UpdatedAt: time.Now(),
 		},
