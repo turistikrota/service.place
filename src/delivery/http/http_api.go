@@ -53,6 +53,13 @@ func (h Server) FeatureList(ctx *fiber.Ctx) error {
 	})
 }
 
+func (h Server) AdminFeatureList(ctx *fiber.Ctx) error {
+	res, err := h.app.Queries.AdminFeatureListAll.Handle(ctx.UserContext(), query.AdminFeatureListAllQuery{})
+	return result.IfSuccessDetail(err, ctx, h.i18n, Messages.Success.FeatureList, func() interface{} {
+		return dto.Response.AdminFeatureList(res)
+	})
+}
+
 func (h Server) PlaceCreate(ctx *fiber.Ctx) error {
 	d := dto.Request.PlaceCreate()
 	h.parseBody(ctx, d)

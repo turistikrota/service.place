@@ -10,6 +10,7 @@ type roles struct {
 	FeatureDelete  string
 	FeatureEnable  string
 	FeatureDisable string
+	FeatureList    string
 	PlaceAll       string
 	PlaceCreate    string
 	PlaceUpdate    string
@@ -26,6 +27,7 @@ var Roles = roles{
 	FeatureDelete:  "place.feature.delete",
 	FeatureEnable:  "place.feature.enable",
 	FeatureDisable: "place.feature.disable",
+	FeatureList:    "place.feature.list",
 	PlaceAll:       "place.all",
 	PlaceCreate:    "place.create",
 	PlaceUpdate:    "place.update",
