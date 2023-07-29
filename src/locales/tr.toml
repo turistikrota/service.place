@@ -42,6 +42,7 @@ http_success_feature_delete = "Özellik başarıyla silindi."
 http_success_feature_disable = "Özellik başarıyla devre dışı bırakıldı."
 http_success_feature_enable = "Özellik başarıyla etkinleştirildi."
 http_success_feature_list = "Özellikler başarıyla listelendi."
+http_success_feature_detail = "Özellik başarıyla görüntülendi."
 http_success_place_create = "Yer başarıyla oluşturuldu."
 http_success_place_update = "Yer başarıyla güncellendi."
 http_success_place_delete = "Yer başarıyla silindi."
@@ -59,6 +60,7 @@ place_feature_uuids_not_found = "Bazı UUID'ye sahip özellikler bulunamadı. Bu
 # Feature Module
 feature_failed = "{{ .Action }} işlemi gerçekleştirilirken bir hata ile karşılaşıldı."
 feature_invalid_uuid = "Geçersiz UUID."
+feature_not_found = "Özellik bulunamadı."
 
 get_query_failed = "Veriler getirilirken bir hata oluştu."
 update_query_not_found = "Güncellenecek veri bulunamadı."

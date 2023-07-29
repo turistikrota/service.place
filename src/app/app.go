@@ -25,6 +25,7 @@ type Commands struct {
 
 type Queries struct {
 	AdminFeatureListAll query.AdminFeatureListAllHandler
+	AdminFeatureDetail  query.AdminFeatureDetailHandler
 	FeatureListAll      query.FeatureListAllHandler
 	PlaceFilter         query.PlaceFilterHandler
 	PlaceView           query.PlaceViewHandler

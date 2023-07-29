@@ -106,6 +106,10 @@ func NewApplication(cnf Config) app.Application {
 				Repo:     featureRepo,
 				CqrsBase: base,
 			}),
+			AdminFeatureDetail: query.NewAdminFeatureDetailHandler(query.AdminFeatureDetailHandlerConfig{
+				Repo:     featureRepo,
+				CqrsBase: base,
+			}),
 			PlaceFilter: query.NewPlaceFilterHandler(query.PlaceFilterHandlerConfig{
 				Repo:     placeRepo,
 				CacheSrv: cnf.CacheSrv,

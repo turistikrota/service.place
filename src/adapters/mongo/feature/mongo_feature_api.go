@@ -140,3 +140,21 @@ func (r *repo) AdminListAll(ctx context.Context) ([]*feature.Entity, *i18np.Erro
 	}
 	return r.helper.GetListFilterTransform(ctx, filter, transformer)
 }
+
+func (r *repo) GetByUUID(ctx context.Context, uuid string) (*feature.Entity, *i18np.Error) {
+	id, err := mongo.TransformId(uuid)
+	if err != nil {
+		return nil, r.factory.Errors.InvalidUUID("find by uuid")
+	}
+	filter := bson.M{
+		entity.Fields.UUID: id,
+	}
+	e, exist, err := r.helper.GetFilter(ctx, filter)
+	if err != nil {
+		return nil, r.factory.Errors.Failed("find by uuid")
+	}
+	if !exist {
+		return nil, r.factory.Errors.NotFound()
+	}
+	return e.ToEntity(), nil
+}

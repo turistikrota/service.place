@@ -7,6 +7,7 @@ type successMessages struct {
 	FeatureDisable string
 	FeatureEnable  string
 	FeatureList    string
+	FeatureDetail  string
 	PlaceCreate    string
 	PlaceUpdate    string
 	PlaceDelete    string
@@ -35,6 +36,7 @@ var Messages = messages{
 		FeatureDisable: "http_success_feature_disable",
 		FeatureEnable:  "http_success_feature_enable",
 		FeatureList:    "http_success_feature_list",
+		FeatureDetail:  "http_success_feature_detail",
 		PlaceCreate:    "http_success_place_create",
 		PlaceUpdate:    "http_success_place_update",
 		PlaceDelete:    "http_success_place_delete",

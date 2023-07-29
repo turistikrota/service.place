@@ -42,6 +42,7 @@ http_success_feature_delete = "The feature has been successfully deleted."
 http_success_feature_disable = "The feature has been successfully disabled."
 http_success_feature_enable = "Feature enabled successfully."
 http_success_feature_list = "Features listed successfully."
+http_success_feature_detail = "Feature detail successfully."
 http_success_place_create = "Place created successfully."
 http_success_place_update = "Place updated successfully."
 http_success_place_delete = "Place successfully deleted."
@@ -59,6 +60,7 @@ place_feature_uuids_not_found = "Features with some UUID were not found. UUIDs n
 # Fature Module
 feature_failed = "An error was encountered while performing {{ .Action }}."
 feature_invalid_uuid = "Invalid UUID."
+feature_not_found = "Feature not found."
 
 get_query_failed = "Get query failed."
 update_query_not_found = "Update query not found. {{.Error}}"
