@@ -13,5 +13,6 @@ type Repository interface {
 	Delete(ctx context.Context, uuid string) *i18np.Error
 	Enable(ctx context.Context, uuid string) *i18np.Error
 	ListAll(ctx context.Context) ([]*Entity, *i18np.Error)
+	AdminListAll(ctx context.Context) ([]*Entity, *i18np.Error)
 	GetByUUIDs(ctx context.Context, uuids []string) ([]*Entity, *i18np.Error)
 }

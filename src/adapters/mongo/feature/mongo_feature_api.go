@@ -132,3 +132,11 @@ func (r *repo) listOptions() *options.FindOptions {
 	})
 	return opts
 }
+
+func (r *repo) AdminListAll(ctx context.Context) ([]*feature.Entity, *i18np.Error) {
+	filter := bson.M{}
+	transformer := func(e *entity.MongoFeature) *feature.Entity {
+		return e.ToEntity()
+	}
+	return r.helper.GetListFilterTransform(ctx, filter, transformer)
+}
