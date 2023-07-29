@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/mixarchitecture/microp/server/http/parser"
 	"github.com/mixarchitecture/microp/server/http"
+	"github.com/mixarchitecture/microp/server/http/parser"
 	"github.com/turistikrota/service.shared/server/http/auth"
 	"github.com/turistikrota/service.shared/server/http/auth/claim_guard"
 	"github.com/turistikrota/service.shared/server/http/auth/current_user"
@@ -67,6 +67,7 @@ func (h Server) Load(router fiber.Router) fiber.Router {
 	featureAdmin.Put("/:uuid/enable", h.adminRoute(config.Roles.FeatureAll, config.Roles.FeatureEnable), h.wrapWithTimeout(h.FeatureEnable))
 	featureAdmin.Put("/:uuid", h.adminRoute(config.Roles.FeatureAll, config.Roles.FeatureUpdate), h.wrapWithTimeout(h.FeatureUpdate))
 	featureAdmin.Delete("/:uuid", h.adminRoute(config.Roles.FeatureAll, config.Roles.FeatureDelete), h.wrapWithTimeout(h.FeatureDelete))
+	featureAdmin.Get("/all", h.adminRoute(config.Roles.FeatureAll, config.Roles.FeatureList), h.wrapWithTimeout(h.AdminFeatureList))
 
 	placeAdmin := router.Group("/place", h.currentUserAccess(), h.requiredAccess())
 	placeAdmin.Post("/", h.adminRoute(config.Roles.PlaceAll, config.Roles.PlaceCreate), h.wrapWithTimeout(h.PlaceCreate))

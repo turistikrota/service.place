@@ -24,7 +24,8 @@ type Commands struct {
 }
 
 type Queries struct {
-	FeatureListAll query.FeatureListAllHandler
-	PlaceFilter    query.PlaceFilterHandler
-	PlaceView      query.PlaceViewHandler
+	AdminFeatureListAll query.AdminFeatureListAllHandler
+	FeatureListAll      query.FeatureListAllHandler
+	PlaceFilter         query.PlaceFilterHandler
+	PlaceView           query.PlaceViewHandler
 }
