@@ -61,11 +61,19 @@ func (l Locale) String() string {
 type Type string
 
 const (
-	TypeEating Type = "eating"
-	TypeCoffee Type = "coffee"
-	TypeBar    Type = "bar"
-	TypeBeach  Type = "beach"
-	TypeAmaze  Type = "amaze"
+	TypeEating    Type = "eating"
+	TypeCoffee    Type = "coffee"
+	TypeBar       Type = "bar"
+	TypeBeach     Type = "beach"
+	TypeAmaze     Type = "amaze"
+	TypeShopping  Type = "shopping"
+	TypeTransport Type = "transport"
+	TypeCulture   Type = "culture"
+	TypeNature    Type = "nature"
+	TypeHealth    Type = "health"
+	TypeSport     Type = "sport"
+	TypeNightlife Type = "nightlife"
+	TypeOther     Type = "other"
 )
 
 func (t Type) String() string {
@@ -73,5 +81,5 @@ func (t Type) String() string {
 }
 
 func (t Type) IsType() bool {
-	return t == TypeEating || t == TypeCoffee || t == TypeBar || t == TypeBeach || t == TypeAmaze
+	return t == TypeEating || t == TypeCoffee || t == TypeBar || t == TypeBeach || t == TypeAmaze || t == TypeShopping || t == TypeTransport || t == TypeCulture || t == TypeNature || t == TypeHealth || t == TypeSport || t == TypeNightlife || t == TypeOther
 }
