@@ -8,6 +8,7 @@ type Response interface {
 	PlaceList(res *query.PlaceFilterResult) *PlaceFilterResponse
 	AdminFeatureList(res *query.AdminFeatureListAllResult) []*AdminFeatureListResponse
 	AdminFeatureDetail(res *query.AdminFeatureDetailResult) *AdminFeatureDetailResponse
+	PlaceAdminList(res *query.PlaceAdminFilterResult) *PlaceAdminFilterResponse
 }
 
 type response struct{}

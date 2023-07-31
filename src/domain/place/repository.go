@@ -20,4 +20,5 @@ type Repository interface {
 	Enable(ctx context.Context, uuid string) *i18np.Error
 	Filter(ctx context.Context, filter EntityFilter, listConfig list.Config) (*list.Result[*Entity], *i18np.Error)
 	View(ctx context.Context, detail I18nDetail) (*Entity, *i18np.Error)
+	List(ctx context.Context, filter EntityFilter, listConfig list.Config) (*list.Result[*Entity], *i18np.Error)
 }

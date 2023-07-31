@@ -123,6 +123,33 @@ func (r *repo) Filter(ctx context.Context, filter place.EntityFilter, listConfig
 	}, nil
 }
 
+func (r *repo) List(ctx context.Context, filter place.EntityFilter, listConfig list.Config) (*list.Result[*place.Entity], *i18np.Error) {
+	anyFilter := r.filterToBson(filter)
+	transformer := func(e *entity.MongoPlace) *place.Entity {
+		return e.ToAdminListEntity()
+	}
+	l, err := r.helper.GetListFilterTransform(ctx, anyFilter, transformer, r.sort(r.listOptions(listConfig), filter))
+	if err != nil {
+		return nil, err
+	}
+	filtered, _err := r.helper.GetFilterCount(ctx, anyFilter)
+	if _err != nil {
+		return nil, _err
+	}
+	total, _err := r.helper.GetFilterCount(ctx, r.baseFilter())
+	if _err != nil {
+		return nil, _err
+	}
+	return &list.Result[*place.Entity]{
+		IsNext:        filtered > listConfig.Offset+listConfig.Limit,
+		IsPrev:        listConfig.Offset > 0,
+		FilteredTotal: filtered,
+		Total:         total,
+		Page:          listConfig.Offset/listConfig.Limit + 1,
+		List:          l,
+	}, nil
+}
+
 func (r *repo) View(ctx context.Context, detail place.I18nDetail) (*place.Entity, *i18np.Error) {
 	filter := bson.M{
 		entity.TranslationField(detail.Locale, entity.TranslationFields.Slug): detail.Slug,
@@ -191,4 +218,9 @@ func (r *repo) filterOptions(listConfig list.Config) *options.FindOptions {
 		entity.Fields.Coordinates:      1,
 	}).SetSkip(listConfig.Offset).SetLimit(listConfig.Limit)
 	return opts
+}
+
+func (r *repo) listOptions(listConfig list.Config) *options.FindOptions {
+	opts := &options.FindOptions{}
+	return opts.SetSkip(listConfig.Offset).SetLimit(listConfig.Limit)
 }
