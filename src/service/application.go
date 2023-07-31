@@ -115,6 +115,11 @@ func NewApplication(cnf Config) app.Application {
 				CacheSrv: cnf.CacheSrv,
 				CqrsBase: base,
 			}),
+			PlaceAdminFilter: query.NewPlaceAdminFilterHandler(query.PlaceAdminFilterHandlerConfig{
+				Repo:     placeRepo,
+				CacheSrv: cnf.CacheSrv,
+				CqrsBase: base,
+			}),
 			PlaceView: query.NewPlaceViewHandler(query.PlaceViewHandlerConfig{
 				Repo:        placeRepo,
 				FeatureRepo: featureRepo,

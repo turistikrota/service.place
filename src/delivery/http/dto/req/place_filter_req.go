@@ -58,6 +58,29 @@ func (r *PlaceFilterRequest) ToQuery(locale string) query.PlaceFilterQuery {
 	}
 }
 
+func (r *PlaceFilterRequest) ToAdminQuery(locale string) query.PlaceAdminFilterQuery {
+	return query.PlaceAdminFilterQuery{
+		AdminFilter: place.EntityFilter{
+			Locale:           locale,
+			Query:            r.Query,
+			Coordinates:      r.Coordinates,
+			FeatureUUIDs:     r.FeatureUUIDs,
+			AverageTimeSpent: r.toAverageTimeSpent(),
+			Distance:         r.Distance,
+			IsPayed:          r.IsPayed,
+			MinAveragePoint:  r.MinAveragePoint,
+			MinReview:        r.MinReview,
+			MaxReview:        r.MaxReview,
+			MaxAveragePoint:  r.MaxAveragePoint,
+			Types:            r.Type,
+			Sort:             r.Sort,
+			Order:            r.Order,
+		},
+		Offset: (r.Page - 1) * r.Limit,
+		Limit:  r.Limit,
+	}
+}
+
 func (r *PlaceFilterRequest) toAverageTimeSpent() *place.TimeSpent {
 	if r.TimeSpent == nil {
 		return nil

@@ -106,6 +106,8 @@ func (e *MongoPlace) ToAdminListEntity() *place.Entity {
 		IsActive:         e.IsActive,
 		Type:             place.Type(e.Type),
 		IsDeleted:        e.IsDeleted,
+		UpdatedAt:        e.UpdatedAt,
+		CreatedAt:        e.CreatedAt,
 	}
 }
 

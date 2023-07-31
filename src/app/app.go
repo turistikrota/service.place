@@ -28,5 +28,6 @@ type Queries struct {
 	AdminFeatureDetail  query.AdminFeatureDetailHandler
 	FeatureListAll      query.FeatureListAllHandler
 	PlaceFilter         query.PlaceFilterHandler
+	PlaceAdminFilter    query.PlaceAdminFilterHandler
 	PlaceView           query.PlaceViewHandler
 }

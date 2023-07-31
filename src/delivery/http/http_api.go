@@ -120,6 +120,19 @@ func (h Server) PlaceFilter(ctx *fiber.Ctx) error {
 	})
 }
 
+func (h Server) PlaceAdminFilter(ctx *fiber.Ctx) error {
+	p := dto.Request.Pagination()
+	d := dto.Request.PlaceFilter()
+	h.parseQuery(ctx, p)
+	d.LoadPagination(p)
+	h.parseBody(ctx, d)
+	l, _ := httpI18n.GetLanguagesInContext(h.i18n, ctx)
+	res, err := h.app.Queries.PlaceAdminFilter.Handle(ctx.UserContext(), d.ToAdminQuery(l))
+	return result.IfSuccessDetail(err, ctx, h.i18n, Messages.Success.PlaceFilter, func() interface{} {
+		return dto.Response.PlaceAdminList(res)
+	})
+}
+
 func (h Server) PlaceView(ctx *fiber.Ctx) error {
 	p := dto.Request.PlaceView()
 	h.parseParams(ctx, p)
