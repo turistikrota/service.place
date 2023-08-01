@@ -176,8 +176,8 @@ func (r *repo) AdminView(ctx context.Context, uuid string) (*place.Entity, *i18n
 	filter := bson.M{
 		entity.Fields.UUID: id,
 	}
-	e, exist, err := r.helper.GetFilter(ctx, filter)
-	if err != nil {
+	e, exist, error := r.helper.GetFilter(ctx, filter)
+	if error != nil {
 		return nil, r.factory.Errors.Failed("get")
 	}
 	if !exist {
