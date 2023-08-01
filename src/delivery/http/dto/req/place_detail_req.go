@@ -1,6 +1,9 @@
 package req
 
-import "github.com/turistikrota/service.place/src/app/command"
+import (
+	"github.com/turistikrota/service.place/src/app/command"
+	"github.com/turistikrota/service.place/src/app/query"
+)
 
 type PlaceDetailRequest struct {
 	UUID string `param:"uuid" validate:"required,object_id"`
@@ -20,6 +23,12 @@ func (r *PlaceDetailRequest) ToEnableCommand() command.PlaceEnableCommand {
 
 func (r *PlaceDetailRequest) ToDeleteCommand() command.PlaceDeleteCommand {
 	return command.PlaceDeleteCommand{
+		UUID: r.UUID,
+	}
+}
+
+func (r *PlaceDetailRequest) ToQuery() query.AdminPlaceViewQuery {
+	return query.AdminPlaceViewQuery{
 		UUID: r.UUID,
 	}
 }

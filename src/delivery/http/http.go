@@ -77,6 +77,7 @@ func (h Server) Load(router fiber.Router) fiber.Router {
 	placeAdmin.Put("/:uuid/enable", h.adminRoute(config.Roles.PlaceAll, config.Roles.PlaceEnable), h.wrapWithTimeout(h.PlaceEnable))
 	placeAdmin.Put("/:uuid", h.adminRoute(config.Roles.PlaceAll, config.Roles.PlaceUpdate), h.wrapWithTimeout(h.PlaceUpdate))
 	placeAdmin.Delete("/:uuid", h.adminRoute(config.Roles.PlaceAll, config.Roles.PlaceDelete), h.wrapWithTimeout(h.PlaceDelete))
+	placeAdmin.Get("/:uuid", h.adminRoute(config.Roles.PlaceAll, config.Roles.PlaceView), h.wrapWithTimeout(h.PlaceAdminView))
 
 	router.Post("/", h.wrapWithTimeout(h.PlaceFilter))
 	router.Get("/:slug", h.wrapWithTimeout(h.PlaceView))

@@ -19,6 +19,7 @@ type roles struct {
 	PlaceDelete    string
 	PlaceEnable    string
 	PlaceDisable   string
+	PlaceView      string
 }
 
 var Roles = roles{
@@ -38,4 +39,5 @@ var Roles = roles{
 	PlaceDelete:    "place.delete",
 	PlaceEnable:    "place.enable",
 	PlaceDisable:   "place.disable",
+	PlaceView:      "place.view",
 }
