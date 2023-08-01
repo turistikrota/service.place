@@ -126,6 +126,11 @@ func NewApplication(cnf Config) app.Application {
 				CacheSrv:    cnf.CacheSrv,
 				CqrsBase:    base,
 			}),
+			PlaceAdminView: query.NewAdminPlaceViewHandler(query.AdminPlaceViewHandlerConfig{
+				Repo:        placeRepo,
+				FeatureRepo: featureRepo,
+				CqrsBase:    base,
+			}),
 		},
 	}
 }

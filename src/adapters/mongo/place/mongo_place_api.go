@@ -168,6 +168,24 @@ func (r *repo) View(ctx context.Context, detail place.I18nDetail) (*place.Entity
 	return e.ToViewEntity(), nil
 }
 
+func (r *repo) AdminView(ctx context.Context, uuid string) (*place.Entity, *i18np.Error) {
+	id, err := mongo.TransformId(uuid)
+	if err != nil {
+		return nil, r.factory.Errors.InvalidUUID()
+	}
+	filter := bson.M{
+		entity.Fields.UUID: id,
+	}
+	e, exist, error := r.helper.GetFilter(ctx, filter)
+	if error != nil {
+		return nil, r.factory.Errors.Failed("get")
+	}
+	if !exist {
+		return nil, r.factory.Errors.NotFound()
+	}
+	return e.ToAdminViewEntity(), nil
+}
+
 func (r *repo) filterToBson(filter place.EntityFilter) bson.M {
 	list := make([]bson.M, 0)
 	list = append(list, r.baseFilter())

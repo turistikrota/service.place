@@ -142,3 +142,12 @@ func (h Server) PlaceView(ctx *fiber.Ctx) error {
 		return dto.Response.PlaceView(res)
 	})
 }
+
+func (h Server) PlaceAdminView(ctx *fiber.Ctx) error {
+	detail := dto.Request.PlaceDetail()
+	h.parseParams(ctx, detail)
+	res, err := h.app.Queries.PlaceAdminView.Handle(ctx.UserContext(), detail.ToQuery())
+	return result.IfSuccessDetail(err, ctx, h.i18n, Messages.Success.PlaceView, func() interface{} {
+		return dto.Response.PlaceAdminView(res)
+	})
+}

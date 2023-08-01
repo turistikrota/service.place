@@ -30,4 +30,5 @@ type Queries struct {
 	PlaceFilter         query.PlaceFilterHandler
 	PlaceAdminFilter    query.PlaceAdminFilterHandler
 	PlaceView           query.PlaceViewHandler
+	PlaceAdminView      query.AdminPlaceViewHandler
 }
