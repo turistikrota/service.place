@@ -6,7 +6,7 @@ type EntityFilter struct {
 	Coordinates      []float64
 	FeatureUUIDs     []string
 	AverageTimeSpent *TimeSpent
-	Distance         float64
+	Distance         *float64
 	IsPayed          *bool
 	MinReview        *int16
 	MaxReview        *int16
@@ -17,13 +17,34 @@ type EntityFilter struct {
 	Order            Order
 }
 
+func (e *EntityFilter) GetPerfectDistance() float64 {
+	if e.Distance == nil {
+		return 10
+	}
+	distances := map[float64]float64{
+		7:  50,
+		8:  30,
+		9:  20,
+		10: 10,
+		11: 5,
+		12: 2,
+		13: 1,
+		14: 0.5,
+		15: 0.3,
+	}
+	if distance, ok := distances[*e.Distance]; ok {
+		return distance
+	}
+	return 10
+}
+
 func (e *EntityFilter) IsZero() bool {
 	return e.Locale == "" &&
 		e.Query == "" &&
 		e.Coordinates == nil &&
 		e.FeatureUUIDs == nil &&
 		e.AverageTimeSpent == nil &&
-		e.Distance == 0 &&
+		e.Distance == nil &&
 		e.IsPayed == nil &&
 		e.MinReview == nil &&
 		e.MaxReview == nil &&

@@ -51,10 +51,7 @@ func (r *repo) filterByQuery(list []bson.M, filter place.EntityFilter) []bson.M 
 
 func (r *repo) filterByLocation(list []bson.M, filter place.EntityFilter) []bson.M {
 	if filter.Coordinates != nil && len(filter.Coordinates) == 2 {
-		distance := filter.Distance
-		if distance == 0 {
-			distance = 100 // 100 km
-		}
+		distance := filter.GetPerfectDistance()
 		radius := distance / 6378.1
 		list = append(list, bson.M{
 			entity.Fields.Coordinates: bson.M{
