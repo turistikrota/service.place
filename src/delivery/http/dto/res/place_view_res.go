@@ -16,7 +16,7 @@ type PlaceViewResponse struct {
 	Coordinates      []float64                           `json:"coordinates"`
 	IsPayed          bool                                `json:"isPayed"`
 	Type             place.Type                          `json:"type"`
-	CreatedAt        time.Time                           `json:"createdAt"`
+	UpdatedAt        time.Time                           `json:"updatedAt"`
 }
 
 func (r *response) PlaceView(res *query.PlaceViewResult) *PlaceViewResponse {
@@ -29,6 +29,6 @@ func (r *response) PlaceView(res *query.PlaceViewResult) *PlaceViewResponse {
 		Coordinates:      res.Place.Coordinates,
 		IsPayed:          res.Place.IsPayed,
 		Type:             res.Place.Type,
-		CreatedAt:        res.Place.CreatedAt,
+		UpdatedAt:        res.Place.UpdatedAt,
 	}
 }

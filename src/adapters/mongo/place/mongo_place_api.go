@@ -217,7 +217,7 @@ func (r *repo) viewOptions() *options.FindOneOptions {
 		entity.Fields.AverageTimeSpent: 1,
 		entity.Fields.Review:           1,
 		entity.Fields.IsPayed:          1,
-		entity.Fields.CreatedAt:        1,
+		entity.Fields.UpdatedAt:        1,
 		entity.Fields.Type:             1,
 		entity.Fields.Coordinates:      1,
 	})
