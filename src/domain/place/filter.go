@@ -41,15 +41,18 @@ func (e *EntityFilter) GetPerfectDistance() float64 {
 func (e *EntityFilter) IsZero() bool {
 	return e.Locale == "" &&
 		e.Query == "" &&
-		e.Coordinates == nil &&
-		e.FeatureUUIDs == nil &&
+		len(e.Coordinates) == 0 &&
+		len(e.FeatureUUIDs) == 0 &&
 		e.AverageTimeSpent == nil &&
 		e.Distance == nil &&
 		e.IsPayed == nil &&
 		e.MinReview == nil &&
 		e.MaxReview == nil &&
 		e.MinAveragePoint == nil &&
-		e.MaxAveragePoint == nil
+		e.MaxAveragePoint == nil &&
+		len(e.Types) == 0 &&
+		!e.Sort.IsValid() &&
+		!e.Order.IsValid()
 }
 
 type (
