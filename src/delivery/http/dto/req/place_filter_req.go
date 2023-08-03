@@ -12,7 +12,7 @@ type PlaceFilterRequest struct {
 	Coordinates     []float64                    `json:"coordinates,omitempty" validate:"omitempty,min=2,max=2"`
 	FeatureUUIDs    []string                     `json:"featureUUIDs,omitempty" validate:"omitempty,min=1,max=10,dive,object_id"`
 	TimeSpent       *PlaceFilterTimeSpentRequest `json:"timeSpent,omitempty" validate:"omitempty,dive,required"`
-	Distance        float64                      `json:"distance,omitempty" validate:"omitempty,gt=0"`
+	Distance        *float64                     `json:"distance,omitempty" validate:"omitempty,gt=6,lt=16"`
 	IsPayed         *bool                        `json:"isPayed,omitempty" validate:"omitempty"`
 	MinReview       *int16                       `json:"minReview,omitempty" validate:"omitempty,gt=0"`
 	MaxReview       *int16                       `json:"maxReview,omitempty" validate:"omitempty,gt=0"`
