@@ -122,6 +122,7 @@ func (e *MongoPlace) ToViewEntity() *place.Entity {
 		IsPayed:          e.IsPayed,
 		Type:             place.Type(e.Type),
 		CreatedAt:        e.CreatedAt,
+		UpdatedAt:        e.UpdatedAt,
 	}
 }
 
