@@ -18,6 +18,9 @@ validation_ltfield = "{{.Field}} alanı {{.Param}} alanından küçük olmalıd�
 validation_lt = "{{.Field}} alanı {{.Param}} değerinden küçük olmalıdır."
 validation_gt = "{{.Field}} alanı {{.Param}} değerinden büyük olmalıdır."
 validation_url = "Bu alan geçerli bir URL olmalıdır."
+validation_gtfield = "{{.Field}} alanı {{.Param}} alanından büyük olmalıdır."
+validation_gtefield = "{{.Field}} alanı {{.Param}} alanından büyük veya eşit olmalıdır."
+validation_ltefield = "{{.Field}} alanı {{.Param}} alanından küçük veya eşit olmalıdır."
 
 error_invalid_request_body = "İstek gövdesi geçersiz."
 error_invalid_request_query = "İstek sorgusu geçersiz."

@@ -14,6 +14,7 @@ type (
 		Translations     map[string]MongoTranslation `bson:"translations"`
 		AverageTimeSpent MongoTimeSpent              `bson:"average_time_spent"`
 		Review           MongoReview                 `bson:"review"`
+		Restorations     []MongoRestoration          `bson:"restorations"`
 		Coordinates      []float64                   `bson:"coordinates"`
 		IsActive         bool                        `bson:"is_active"`
 		IsDeleted        bool                        `bson:"is_deleted"`
@@ -21,6 +22,10 @@ type (
 		Type             string                      `bson:"type"`
 		UpdatedAt        time.Time                   `bson:"updated_at"`
 		CreatedAt        time.Time                   `bson:"created_at"`
+	}
+	MongoRestoration struct {
+		StartDate *time.Time `bson:"start_date"`
+		EndDate   *time.Time `bson:"end_date"`
 	}
 	MongoTranslation struct {
 		Title       string   `bson:"title"`
@@ -54,6 +59,7 @@ func (e *MongoPlace) FromEntity(entity *place.Entity) *MongoPlace {
 	e.Translations = e.fromTranslations(entity.Translations)
 	e.AverageTimeSpent = e.fromTimeSpent(entity.AverageTimeSpent)
 	e.Review = e.fromReview(entity.Review)
+	e.Restorations = e.fromRestorations(entity.Restorations)
 	e.IsActive = entity.IsActive
 	e.Coordinates = entity.Coordinates
 	e.IsDeleted = entity.IsDeleted
@@ -71,6 +77,7 @@ func (e *MongoPlace) FromEntityUpdate(entity *place.Entity) *MongoPlace {
 	e.Translations = e.fromTranslations(entity.Translations)
 	e.AverageTimeSpent = e.fromTimeSpent(entity.AverageTimeSpent)
 	e.Review = e.fromReview(entity.Review)
+	e.Restorations = e.fromRestorations(entity.Restorations)
 	e.IsActive = entity.IsActive
 	e.IsDeleted = entity.IsDeleted
 	e.Coordinates = entity.Coordinates
@@ -118,6 +125,7 @@ func (e *MongoPlace) ToViewEntity() *place.Entity {
 		Translations:     e.toTranslations(),
 		AverageTimeSpent: e.toTimeSpent(),
 		Review:           e.toReview(),
+		Restorations:     e.toRestorations(),
 		Coordinates:      e.Coordinates,
 		IsPayed:          e.IsPayed,
 		Type:             place.Type(e.Type),
@@ -134,6 +142,7 @@ func (e *MongoPlace) ToAdminViewEntity() *place.Entity {
 		Translations:     e.toTranslations(),
 		AverageTimeSpent: e.toTimeSpent(),
 		Review:           e.toReview(),
+		Restorations:     e.toRestorations(),
 		IsPayed:          e.IsPayed,
 		Coordinates:      e.Coordinates,
 		IsActive:         e.IsActive,
@@ -228,4 +237,26 @@ func (e *MongoPlace) toReview() place.Review {
 		Total:        e.Review.Total,
 		AveragePoint: e.Review.AveragePoint,
 	}
+}
+
+func (e *MongoPlace) fromRestorations(restorations []place.Restoration) []MongoRestoration {
+	mongoRestorations := make([]MongoRestoration, 0)
+	for _, restoration := range restorations {
+		mongoRestorations = append(mongoRestorations, MongoRestoration{
+			StartDate: restoration.StartDate,
+			EndDate:   restoration.EndDate,
+		})
+	}
+	return mongoRestorations
+}
+
+func (e *MongoPlace) toRestorations() []place.Restoration {
+	restorations := make([]place.Restoration, 0)
+	for _, mongoRestoration := range e.Restorations {
+		restorations = append(restorations, place.Restoration{
+			StartDate: mongoRestoration.StartDate,
+			EndDate:   mongoRestoration.EndDate,
+		})
+	}
+	return restorations
 }

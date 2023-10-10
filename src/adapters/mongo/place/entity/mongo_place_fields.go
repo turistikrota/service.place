@@ -7,6 +7,7 @@ type fields struct {
 	Translations     string
 	AverageTimeSpent string
 	Review           string
+	Restorations     string
 	IsActive         string
 	IsDeleted        string
 	IsPayed          string
@@ -55,6 +56,7 @@ var Fields = fields{
 	IsActive:         "is_active",
 	IsDeleted:        "is_deleted",
 	IsPayed:          "is_payed",
+	Restorations:    "restorations",
 	UpdatedAt:        "updated_at",
 	CreatedAt:        "created_at",
 	Coordinates:      "coordinates",

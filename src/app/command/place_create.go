@@ -13,6 +13,7 @@ type (
 	PlaceCreateCommand struct {
 		FeatureUUIDs     []string
 		Images           []place.Image
+		Restorations     []place.Restoration
 		Translations     map[place.Locale]place.Translations
 		AverageTimeSpent place.TimeSpent
 		Coordinates      []float64
@@ -60,7 +61,8 @@ func (h placeCreateHandler) Handle(ctx context.Context, command PlaceCreateComma
 		AverageTimeSpent: command.AverageTimeSpent,
 		Coordinates:      command.Coordinates,
 		IsPayed:          command.IsPayed,
-		Type: 		   command.Type,
+		Type:             command.Type,
+		Restorations:    command.Restorations,
 	})
 	err = h.repo.Create(ctx, p)
 	if err != nil {
