@@ -60,6 +60,7 @@ func (h placeCreateHandler) Handle(ctx context.Context, command PlaceCreateComma
 		AverageTimeSpent: command.AverageTimeSpent,
 		Coordinates:      command.Coordinates,
 		IsPayed:          command.IsPayed,
+		Type: 		   command.Type,
 	})
 	err = h.repo.Create(ctx, p)
 	if err != nil {
