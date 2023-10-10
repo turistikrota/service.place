@@ -26,6 +26,11 @@ type PlaceTranslationSeoRequest struct {
 	Keywords    string `json:"keywords" validate:"required,min=1,max=255"`
 }
 
+type PlaceRestorationRequest struct {
+	StartDate string `json:"startDate" validate:"required,datetime=2006-01-02"`
+	EndDate   string `json:"endDate" validate:"omitempty,datetime=2006-01-02,gtfield=StartDate"`
+}
+
 func (r *PlaceTranslationSeoRequest) ToSeo() place.Seo {
 	return place.Seo{
 		Title:       r.Title,

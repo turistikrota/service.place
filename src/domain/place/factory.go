@@ -19,6 +19,7 @@ type NewConfig struct {
 	Images           []Image
 	Translations     map[Locale]Translations
 	AverageTimeSpent TimeSpent
+	Restorations     []Restoration
 	Coordinates      []float64
 	IsPayed          bool
 	Type             Type
@@ -30,6 +31,7 @@ func (f Factory) New(config NewConfig) *Entity {
 		Images:           config.Images,
 		Translations:     config.Translations,
 		AverageTimeSpent: config.AverageTimeSpent,
+		Restorations:     config.Restorations,
 		Review: Review{
 			Total:        0,
 			AveragePoint: 0,

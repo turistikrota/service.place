@@ -12,6 +12,7 @@ type PlaceAdminViewResponse struct {
 	Features         []query.AdminPlaceViewFeatureItem   `json:"features"`
 	Images           []place.Image                       `json:"images"`
 	Translations     map[place.Locale]place.Translations `json:"translations"`
+	Restorations     []place.Restoration                 `json:"restorations"`
 	AverageTimeSpent place.TimeSpent                     `json:"averageTimeSpent"`
 	Review           place.Review                        `json:"review"`
 	Coordinates      []float64                           `json:"coordinates"`
@@ -29,6 +30,7 @@ func (r *response) PlaceAdminView(res *query.AdminPlaceViewResult) *PlaceAdminVi
 		Features:         res.Features,
 		Images:           res.Place.Images,
 		Translations:     res.Place.Translations,
+		Restorations:     res.Place.Restorations,
 		AverageTimeSpent: res.Place.AverageTimeSpent,
 		Review:           res.Place.Review,
 		Coordinates:      res.Place.Coordinates,

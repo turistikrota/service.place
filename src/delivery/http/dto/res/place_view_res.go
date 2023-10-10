@@ -11,6 +11,7 @@ type PlaceViewResponse struct {
 	Features         []query.PlaceViewFeatureItem        `json:"features"`
 	Images           []place.Image                       `json:"images"`
 	Translations     map[place.Locale]place.Translations `json:"translations"`
+	Restorations     []place.Restoration                 `json:"restorations"`
 	AverageTimeSpent place.TimeSpent                     `json:"averageTimeSpent"`
 	Review           place.Review                        `json:"review"`
 	Coordinates      []float64                           `json:"coordinates"`
@@ -27,6 +28,7 @@ func (r *response) PlaceView(res *query.PlaceViewResult) *PlaceViewResponse {
 		AverageTimeSpent: res.Place.AverageTimeSpent,
 		Review:           res.Place.Review,
 		Coordinates:      res.Place.Coordinates,
+		Restorations:     res.Place.Restorations,
 		IsPayed:          res.Place.IsPayed,
 		Type:             res.Place.Type,
 		UpdatedAt:        res.Place.UpdatedAt,

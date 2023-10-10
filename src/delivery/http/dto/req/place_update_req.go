@@ -2,6 +2,7 @@ package req
 
 import (
 	"strings"
+	"time"
 
 	"github.com/ssibrahimbas/slug"
 	"github.com/turistikrota/service.place/src/app/command"
@@ -15,6 +16,7 @@ type PlaceUpdateRequest struct {
 	Coordinates  []float64                 `json:"coordinates" validate:"required,min=2,max=2,dive,required"`
 	TimeSpent    PlaceTimeSpentRequest     `json:"timeSpent" validate:"required,dive,required"`
 	Translations []PlaceTranslationRequest `json:"translations" validate:"required,min=1,max=3,dive,required"`
+	Restorations []PlaceRestorationRequest `json:"restorations" validate:"omitempty,min=0,max=100,dive,required"`
 	IsPayed      *bool                     `json:"isPayed" validate:"required"`
 	Type         string                    `json:"type" validate:"required,oneof=eating coffee bar beach amaze shopping transport culture nature health sport nightlife other"`
 }
@@ -30,11 +32,25 @@ func (r *PlaceUpdateRequest) ToCommand() command.PlaceUpdateCommand {
 		Images:           r.toImages(),
 		Translations:     r.toTranslations(),
 		AverageTimeSpent: r.toAverageTimeSpent(),
+		Restorations:     r.toRestorations(),
 		Coordinates:      r.Coordinates,
 		IsPayed:          r.toIsPayed(),
 		UUID:             r.UUID,
 		Type:             place.Type(r.Type),
 	}
+}
+
+func (r *PlaceUpdateRequest) toRestorations() []place.Restoration {
+	restorations := make([]place.Restoration, len(r.Restorations))
+	for i, restoration := range r.Restorations {
+		startDate, _ := time.Parse("2006-01-02", restoration.StartDate)
+		endDate, _ := time.Parse("2006-01-02", restoration.EndDate)
+		restorations[i] = place.Restoration{
+			StartDate: &startDate,
+			EndDate:   &endDate,
+		}
+	}
+	return restorations
 }
 
 func (r *PlaceUpdateRequest) toImages() []place.Image {

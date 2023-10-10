@@ -9,6 +9,7 @@ type Entity struct {
 	Translations     map[Locale]Translations `json:"translations"`
 	AverageTimeSpent TimeSpent               `json:"averageTimeSpent"`
 	Review           Review                  `json:"review"`
+	Restorations     []Restoration           `json:"restorations"`
 	Coordinates      []float64               `json:"coordinates"`
 	IsActive         bool                    `json:"is_active"`
 	IsDeleted        bool                    `json:"is_deleted"`
@@ -26,6 +27,11 @@ type Image struct {
 type TimeSpent struct {
 	Min int16 `json:"min"`
 	Max int16 `json:"max"`
+}
+
+type Restoration struct {
+	StartDate *time.Time `json:"start_date"`
+	EndDate   *time.Time `json:"end_date"`
 }
 
 type Review struct {
