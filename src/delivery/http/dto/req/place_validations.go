@@ -28,7 +28,7 @@ type PlaceTranslationSeoRequest struct {
 
 type PlaceRestorationRequest struct {
 	StartDate string `json:"startDate" validate:"required,datetime=2006-01-02"`
-	EndDate   string `json:"endDate" validate:"omitempty,datetime=2006-01-02,gtfield=StartDate"`
+	EndDate   string `json:"endDate" validate:"omitempty,datetime=2006-01-02"`
 }
 
 func (r *PlaceTranslationSeoRequest) ToSeo() place.Seo {
