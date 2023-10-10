@@ -74,7 +74,7 @@ func (r *PlaceUpdateRequest) toTranslations() map[place.Locale]place.Translation
 		translations[place.Locale(translation.Locale)] = place.Translations{
 			Title:       translation.Title,
 			Description: translation.Description,
-			Slug:        slug.New(translation.Title, slug.Lang(strings.ToUpper(translation.Locale))),
+			Slug:        slug.New(translation.Title, slug.Lang(strings.ToLower(translation.Locale))),
 			MarkdownURL: translation.MarkdownURL,
 			Seo:         translation.Seo.ToSeo(),
 		}
