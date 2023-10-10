@@ -4,12 +4,12 @@ import "github.com/turistikrota/service.place/src/domain/place"
 
 type PlaceImageRequest struct {
 	Url   string `json:"url" validate:"required,url"`
-	Order *int16 `json:"order" validate:"required,min=0,max=20"`
+	Order *int16 `json:"order" validate:"required,min=0,max=200"`
 }
 
 type PlaceTimeSpentRequest struct {
-	Min int16 `json:"min" validate:"required,min=0,max=200"`
-	Max int16 `json:"max" validate:"required,min=0,max=200"`
+	Min int16 `json:"min" validate:"required,min=0,max=2000"`
+	Max int16 `json:"max" validate:"required,min=0,max=2000"`
 }
 
 type PlaceTranslationRequest struct {
