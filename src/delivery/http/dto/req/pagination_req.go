@@ -12,6 +12,6 @@ func (r *PaginationRequest) Default() {
 	}
 	if r.Limit == nil {
 		r.Limit = new(int64)
-		*r.Limit = 10
+		*r.Limit = 9
 	}
 }

@@ -130,7 +130,7 @@ func (r *repo) sort(opts *options.FindOptions, filter place.EntityFilter) *optio
 	if filter.Order == place.OrderAsc {
 		order = 1
 	}
-	field := entity.ReviewField(entity.ReviewFields.AveragePoint)
+	field := entity.Fields.CreatedAt
 	switch filter.Sort {
 	case place.SortByMostLiked:
 		field = entity.ReviewField(entity.ReviewFields.AveragePoint)
