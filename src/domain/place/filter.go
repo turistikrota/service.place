@@ -61,10 +61,8 @@ type (
 )
 
 const (
-	SortByMostPopular Sort = "most_popular"
-	SortByMostLiked   Sort = "most_liked"
-	SortByMostRecent  Sort = "most_recent"
-	SortByNearest     Sort = "nearest"
+	SortByMostRecent Sort = "most_recent"
+	SortByNearest    Sort = "nearest"
 )
 
 const (
@@ -73,9 +71,7 @@ const (
 )
 
 func (s Sort) IsValid() bool {
-	return s == SortByMostPopular ||
-		s == SortByMostLiked ||
-		s == SortByMostRecent ||
+	return s == SortByMostRecent ||
 		s == SortByNearest
 }
 

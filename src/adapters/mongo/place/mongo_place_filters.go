@@ -130,14 +130,10 @@ func (r *repo) sort(opts *options.FindOptions, filter place.EntityFilter) *optio
 	if filter.Order == place.OrderAsc {
 		order = 1
 	}
-	field := entity.Fields.CreatedAt
+	field := entity.Fields.UpdatedAt
 	switch filter.Sort {
-	case place.SortByMostLiked:
-		field = entity.ReviewField(entity.ReviewFields.AveragePoint)
-	case place.SortByMostPopular:
-		field = entity.ReviewField(entity.ReviewFields.Total)
 	case place.SortByMostRecent:
-		field = entity.Fields.CreatedAt
+		field = entity.Fields.UpdatedAt
 	case place.SortByNearest:
 		field = entity.Fields.Coordinates
 	}

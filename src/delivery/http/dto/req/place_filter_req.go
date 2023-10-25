@@ -19,7 +19,7 @@ type PlaceFilterRequest struct {
 	MinAveragePoint *float32                     `json:"minAveragePoint,omitempty" validate:"omitempty,gt=0"`
 	MaxAveragePoint *float32                     `json:"maxAveragePoint,omitempty" validate:"omitempty,gt=0"`
 	Type            []place.Type                 `json:"types,omitempty" validate:"omitempty,dive,required"`
-	Sort            place.Sort                   `json:"sort,omitempty" validate:"omitempty,oneof=most_popular most_liked most_recent nearest"`
+	Sort            place.Sort                   `json:"sort,omitempty" validate:"omitempty,oneof=most_recent nearest"`
 	Order           place.Order                  `json:"order,omitempty" validate:"omitempty,oneof=asc desc"`
 }
 
