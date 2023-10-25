@@ -79,6 +79,12 @@ const (
 	TypeHealth    Type = "health"
 	TypeSport     Type = "sport"
 	TypeNightlife Type = "nightlife"
+	TypeGarden    Type = "garden"
+	TypeTemple    Type = "temple"
+	TypeMuseum    Type = "museum"
+	TypeAntique   Type = "antique"
+	TypePark      Type = "park"
+	TypeThemePark Type = "themePark"
 	TypeOther     Type = "other"
 )
 
@@ -87,5 +93,5 @@ func (t Type) String() string {
 }
 
 func (t Type) IsType() bool {
-	return t == TypeEating || t == TypeCoffee || t == TypeBar || t == TypeBeach || t == TypeAmaze || t == TypeShopping || t == TypeTransport || t == TypeCulture || t == TypeNature || t == TypeHealth || t == TypeSport || t == TypeNightlife || t == TypeOther
+	return t == TypeEating || t == TypeCoffee || t == TypeBar || t == TypeBeach || t == TypeAmaze || t == TypeShopping || t == TypeTransport || t == TypeCulture || t == TypeNature || t == TypeHealth || t == TypeSport || t == TypeNightlife || t == TypeGarden || t == TypeTemple || t == TypeMuseum || t == TypeAntique || t == TypePark || t == TypeThemePark || t == TypeOther
 }
