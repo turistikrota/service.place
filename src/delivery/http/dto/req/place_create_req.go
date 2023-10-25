@@ -17,7 +17,7 @@ type PlaceCreateRequest struct {
 	Translations []PlaceTranslationRequest `json:"translations" validate:"required,min=1,max=3,dive,required"`
 	Restorations []PlaceRestorationRequest `json:"restorations" validate:"omitempty,min=0,max=100,dive,required"`
 	IsPayed      *bool                     `json:"isPayed" validate:"required"`
-	Type         string                    `json:"type" validate:"required,oneof=eating coffee bar beach amaze shopping transport culture nature health sport nightlife other"`
+	Type         string                    `json:"type" validate:"required,oneof=eating coffee bar beach amaze shopping transport culture nature health sport nightlife garden temple museum antique park themePark other"`
 }
 
 func (r *PlaceCreateRequest) ToCommand() command.PlaceCreateCommand {
