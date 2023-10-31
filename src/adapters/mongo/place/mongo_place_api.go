@@ -10,16 +10,17 @@ import (
 	"github.com/turistikrota/service.place/src/domain/place"
 	"github.com/turistikrota/service.shared/db/mongo"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func (r *repo) Create(ctx context.Context, e *place.Entity) *i18np.Error {
+func (r *repo) Create(ctx context.Context, e *place.Entity) (string, *i18np.Error) {
 	p := &entity.MongoPlace{}
-	_, err := r.collection.InsertOne(ctx, p.FromEntity(e))
+	res, err := r.collection.InsertOne(ctx, p.FromEntity(e))
 	if err != nil {
-		return r.factory.Errors.Failed("create")
+		return "", r.factory.Errors.Failed("create")
 	}
-	return nil
+	return res.InsertedID.(primitive.ObjectID).Hex(), nil
 }
 
 func (r *repo) Update(ctx context.Context, uuid string, e *place.Entity) *i18np.Error {

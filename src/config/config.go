@@ -94,6 +94,10 @@ type Nats struct {
 	Streams []string `env:"NATS_STREAMS" envDefault:""`
 }
 
+type CDN struct {
+	Url string `env:"CDN_URL" envDefault:"http://localhost:3000"`
+}
+
 type App struct {
 	Protocol string `env:"PROTOCOL" envDefault:"http"`
 	DB       struct {
@@ -110,4 +114,5 @@ type App struct {
 	Redis       Redis
 	CacheRedis  CacheRedis
 	TokenSrv    TokenSrv
+	CDN         CDN
 }

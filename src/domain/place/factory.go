@@ -17,7 +17,7 @@ func (f Factory) IsZero() bool {
 type NewConfig struct {
 	FeatureUUIDs     []string
 	Images           []Image
-	Translations     map[Locale]Translations
+	Translations     map[Locale]*Translations
 	AverageTimeSpent TimeSpent
 	Restorations     []Restoration
 	Coordinates      []float64

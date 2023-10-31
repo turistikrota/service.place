@@ -61,14 +61,14 @@ func (r *PlaceCreateRequest) toRestorations() []place.Restoration {
 	return restorations
 }
 
-func (r *PlaceCreateRequest) toTranslations() map[place.Locale]place.Translations {
-	translations := make(map[place.Locale]place.Translations)
+func (r *PlaceCreateRequest) toTranslations() map[place.Locale]*place.Translations {
+	translations := make(map[place.Locale]*place.Translations)
 	for _, translation := range r.Translations {
-		translations[place.Locale(translation.Locale)] = place.Translations{
+		translations[place.Locale(translation.Locale)] = &place.Translations{
 			Title:       translation.Title,
 			Description: translation.Description,
 			Slug:        slug.New(translation.Title, slug.Lang(strings.ToLower(translation.Locale))),
-			MarkdownURL: translation.MarkdownURL,
+			MarkdownURL: "",
 			Seo:         translation.Seo.ToSeo(),
 		}
 	}

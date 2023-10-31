@@ -1,6 +1,9 @@
 package res
 
-import "github.com/turistikrota/service.place/src/app/query"
+import (
+	"github.com/turistikrota/service.place/src/app/command"
+	"github.com/turistikrota/service.place/src/app/query"
+)
 
 type Response interface {
 	PlaceView(res *query.PlaceViewResult) *PlaceViewResponse
@@ -10,6 +13,7 @@ type Response interface {
 	AdminFeatureDetail(res *query.AdminFeatureDetailResult) *AdminFeatureDetailResponse
 	PlaceAdminList(res *query.PlaceAdminFilterResult) *PlaceAdminFilterResponse
 	PlaceAdminView(res *query.AdminPlaceViewResult) *PlaceAdminViewResponse
+	PlaceCreate(res *command.PlaceCreateResult) *PlaceCreateResponse
 }
 
 type response struct{}

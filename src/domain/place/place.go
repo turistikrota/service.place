@@ -3,20 +3,20 @@ package place
 import "time"
 
 type Entity struct {
-	UUID             string                  `json:"uuid"`
-	FeatureUUIDs     []string                `json:"featureUUIDs"`
-	Images           []Image                 `json:"images"`
-	Translations     map[Locale]Translations `json:"translations"`
-	AverageTimeSpent TimeSpent               `json:"averageTimeSpent"`
-	Review           Review                  `json:"review"`
-	Restorations     []Restoration           `json:"restorations"`
-	Coordinates      []float64               `json:"coordinates"`
-	IsActive         bool                    `json:"is_active"`
-	IsDeleted        bool                    `json:"is_deleted"`
-	IsPayed          bool                    `json:"is_payed"`
-	Type             Type                    `json:"type"`
-	UpdatedAt        time.Time               `json:"updated_at"`
-	CreatedAt        time.Time               `json:"created_at"`
+	UUID             string                   `json:"uuid"`
+	FeatureUUIDs     []string                 `json:"featureUUIDs"`
+	Images           []Image                  `json:"images"`
+	Translations     map[Locale]*Translations `json:"translations"`
+	AverageTimeSpent TimeSpent                `json:"averageTimeSpent"`
+	Review           Review                   `json:"review"`
+	Restorations     []Restoration            `json:"restorations"`
+	Coordinates      []float64                `json:"coordinates"`
+	IsActive         bool                     `json:"is_active"`
+	IsDeleted        bool                     `json:"is_deleted"`
+	IsPayed          bool                     `json:"is_payed"`
+	Type             Type                     `json:"type"`
+	UpdatedAt        time.Time                `json:"updated_at"`
+	CreatedAt        time.Time                `json:"created_at"`
 }
 
 type Image struct {
