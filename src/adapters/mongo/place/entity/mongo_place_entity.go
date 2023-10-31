@@ -175,7 +175,7 @@ func (e *MongoPlace) toImages() []place.Image {
 	return images
 }
 
-func (e *MongoPlace) fromTranslations(translations map[place.Locale]place.Translations) map[string]MongoTranslation {
+func (e *MongoPlace) fromTranslations(translations map[place.Locale]*place.Translations) map[string]MongoTranslation {
 	mongoTranslations := make(map[string]MongoTranslation)
 	for key, translation := range translations {
 		mongoTranslations[key.String()] = MongoTranslation{
@@ -193,10 +193,10 @@ func (e *MongoPlace) fromTranslations(translations map[place.Locale]place.Transl
 	return mongoTranslations
 }
 
-func (e *MongoPlace) toTranslations() map[place.Locale]place.Translations {
-	translations := make(map[place.Locale]place.Translations)
+func (e *MongoPlace) toTranslations() map[place.Locale]*place.Translations {
+	translations := make(map[place.Locale]*place.Translations)
 	for key, mongoTranslation := range e.Translations {
-		translations[place.Locale(key)] = place.Translations{
+		translations[place.Locale(key)] = &place.Translations{
 			Title:       mongoTranslation.Title,
 			Description: mongoTranslation.Description,
 			Slug:        mongoTranslation.Slug,

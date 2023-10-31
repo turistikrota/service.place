@@ -125,11 +125,13 @@ func NewApplication(cnf Config) app.Application {
 				FeatureRepo: featureRepo,
 				CacheSrv:    cnf.CacheSrv,
 				CqrsBase:    base,
+				CdnUrl:      cnf.App.CDN.Url,
 			}),
 			PlaceAdminView: query.NewAdminPlaceViewHandler(query.AdminPlaceViewHandlerConfig{
 				Repo:        placeRepo,
 				FeatureRepo: featureRepo,
 				CqrsBase:    base,
+				CdnUrl:      cnf.App.CDN.Url,
 			}),
 		},
 	}

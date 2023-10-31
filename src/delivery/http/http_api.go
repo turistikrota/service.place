@@ -72,8 +72,10 @@ func (h Server) AdminFeatureDetail(ctx *fiber.Ctx) error {
 func (h Server) PlaceCreate(ctx *fiber.Ctx) error {
 	d := dto.Request.PlaceCreate()
 	h.parseBody(ctx, d)
-	_, err := h.app.Commands.PlaceCreate.Handle(ctx.UserContext(), d.ToCommand())
-	return result.IfSuccess(err, ctx, h.i18n, Messages.Success.PlaceCreate)
+	res, err := h.app.Commands.PlaceCreate.Handle(ctx.UserContext(), d.ToCommand())
+	return result.IfSuccessDetail(err, ctx, h.i18n, Messages.Success.PlaceCreate, func() interface{} {
+		return dto.Response.PlaceCreate(res)
+	})
 }
 
 func (h Server) PlaceUpdate(ctx *fiber.Ctx) error {

@@ -25,12 +25,14 @@ type (
 		repo        place.Repository
 		featureRepo feature.Repository
 		cache       cache.Client[*place.Entity]
+		cdnUrl      string
 	}
 	PlaceViewHandlerConfig struct {
 		Repo        place.Repository
 		FeatureRepo feature.Repository
 		CacheSrv    cache.Service
 		CqrsBase    decorator.Base
+		CdnUrl      string
 	}
 	PlaceViewFeatureItem struct {
 		UUID         string                                  `json:"uuid"`
@@ -45,6 +47,7 @@ func NewPlaceViewHandler(config PlaceViewHandlerConfig) PlaceViewHandler {
 			repo:        config.Repo,
 			featureRepo: config.FeatureRepo,
 			cache:       cache.New[*place.Entity](config.CacheSrv),
+			cdnUrl:      config.CdnUrl,
 		},
 		config.CqrsBase,
 	)
@@ -64,6 +67,14 @@ func (h placeViewHandler) Handle(ctx context.Context, query PlaceViewQuery) (*Pl
 	features, err := h.getFeatures(ctx, res.FeatureUUIDs)
 	if err != nil {
 		return nil, err
+	}
+	trTranslations, trOk := res.Translations[place.LocaleTR]
+	enTranslations, enOk := res.Translations[place.LocaleEN]
+	if enOk && enTranslations.MarkdownURL == "" {
+		enTranslations.MarkdownURL = dressCdnMarkdown(h.cdnUrl, res.UUID, place.LocaleEN.String())
+	}
+	if trOk && trTranslations.MarkdownURL == "" {
+		trTranslations.MarkdownURL = dressCdnMarkdown(h.cdnUrl, res.UUID, place.LocaleTR.String())
 	}
 	return &PlaceViewResult{
 		Place:    res,
@@ -93,4 +104,8 @@ func (h placeViewHandler) getFeatures(ctx context.Context, uuids []string) ([]Pl
 		}
 	}
 	return list, nil
+}
+
+func dressCdnMarkdown(host string, identity string, locale string) string {
+	return fmt.Sprintf("%s/places/md/%s.%s.md", host, identity, locale)
 }

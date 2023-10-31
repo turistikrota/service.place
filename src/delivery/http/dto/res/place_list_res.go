@@ -57,7 +57,7 @@ func (r *response) placeListChild(list []*place.Entity) []PlaceFilterChild {
 	return res
 }
 
-func (r *response) translations(translations map[place.Locale]place.Translations) map[place.Locale]Translations {
+func (r *response) translations(translations map[place.Locale]*place.Translations) map[place.Locale]Translations {
 	res := make(map[place.Locale]Translations, len(translations))
 	for k, v := range translations {
 		res[k] = Translations{

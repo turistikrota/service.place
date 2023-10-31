@@ -22,12 +22,14 @@ type (
 	adminPlaceViewHandler struct {
 		repo        place.Repository
 		featureRepo feature.Repository
+		cdnUrl      string
 	}
 	AdminPlaceViewHandlerConfig struct {
 		Repo        place.Repository
 		FeatureRepo feature.Repository
 		CacheSrv    cache.Service
 		CqrsBase    decorator.Base
+		CdnUrl      string
 	}
 	AdminPlaceViewFeatureItem struct {
 		UUID         string                                  `json:"uuid"`
@@ -41,6 +43,7 @@ func NewAdminPlaceViewHandler(config AdminPlaceViewHandlerConfig) AdminPlaceView
 		adminPlaceViewHandler{
 			repo:        config.Repo,
 			featureRepo: config.FeatureRepo,
+			cdnUrl:      config.CdnUrl,
 		},
 		config.CqrsBase,
 	)
@@ -50,6 +53,15 @@ func (h adminPlaceViewHandler) Handle(ctx context.Context, query AdminPlaceViewQ
 	res, err := h.repo.AdminView(ctx, query.UUID)
 	if err != nil {
 		return nil, err
+	}
+	trTranslations, trOk := res.Translations[place.LocaleTR]
+	enTranslations, enOk := res.Translations[place.LocaleEN]
+	if enOk && enTranslations.MarkdownURL == "" {
+		enTranslations.MarkdownURL = dressCdnMarkdown(h.cdnUrl, res.UUID, place.LocaleEN.String())
+	}
+	if trOk && trTranslations.MarkdownURL == "" {
+		trTranslations.MarkdownURL = dressCdnMarkdown(h.cdnUrl, res.UUID, place.LocaleTR.String())
+		
 	}
 	features, err := h.getFeatures(ctx, res.FeatureUUIDs)
 	if err != nil {

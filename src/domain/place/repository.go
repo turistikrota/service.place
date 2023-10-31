@@ -13,7 +13,7 @@ type I18nDetail struct {
 }
 
 type Repository interface {
-	Create(ctx context.Context, place *Entity) *i18np.Error
+	Create(ctx context.Context, place *Entity) (string, *i18np.Error)
 	Update(ctx context.Context, uuid string, place *Entity) *i18np.Error
 	Disable(ctx context.Context, uuid string) *i18np.Error
 	Delete(ctx context.Context, uuid string) *i18np.Error

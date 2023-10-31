@@ -15,7 +15,7 @@ type (
 		FeatureUUIDs     []string
 		Images           []place.Image
 		Restorations     []place.Restoration
-		Translations     map[place.Locale]place.Translations
+		Translations     map[place.Locale]*place.Translations
 		AverageTimeSpent place.TimeSpent
 		Coordinates      []float64
 		IsPayed          bool
@@ -63,7 +63,7 @@ func (h placeUpdateHandler) Handle(ctx context.Context, command PlaceUpdateComma
 		Coordinates:      command.Coordinates,
 		IsPayed:          command.IsPayed,
 		Type:             command.Type,
-		Restorations:    command.Restorations,
+		Restorations:     command.Restorations,
 	})
 	err = h.repo.Update(ctx, command.UUID, p)
 	if err != nil {

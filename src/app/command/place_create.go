@@ -14,13 +14,15 @@ type (
 		FeatureUUIDs     []string
 		Images           []place.Image
 		Restorations     []place.Restoration
-		Translations     map[place.Locale]place.Translations
+		Translations     map[place.Locale]*place.Translations
 		AverageTimeSpent place.TimeSpent
 		Coordinates      []float64
 		IsPayed          bool
 		Type             place.Type
 	}
-	PlaceCreateResult  struct{}
+	PlaceCreateResult struct {
+		UUID string
+	}
 	PlaceCreateHandler decorator.CommandHandler[PlaceCreateCommand, *PlaceCreateResult]
 	placeCreateHandler struct {
 		repo        place.Repository
@@ -62,13 +64,13 @@ func (h placeCreateHandler) Handle(ctx context.Context, command PlaceCreateComma
 		Coordinates:      command.Coordinates,
 		IsPayed:          command.IsPayed,
 		Type:             command.Type,
-		Restorations:    command.Restorations,
+		Restorations:     command.Restorations,
 	})
-	err = h.repo.Create(ctx, p)
-	if err != nil {
-		return nil, err
+	id, error := h.repo.Create(ctx, p)
+	if error != nil {
+		return nil, error
 	}
-	return &PlaceCreateResult{}, nil
+	return &PlaceCreateResult{UUID: id}, nil
 }
 
 func (h placeCreateHandler) checkFeatureUUIDs(ctx context.Context, uuids []string) *i18np.Error {
