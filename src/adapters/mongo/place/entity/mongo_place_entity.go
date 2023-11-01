@@ -120,6 +120,7 @@ func (e *MongoPlace) ToAdminListEntity() *place.Entity {
 
 func (e *MongoPlace) ToViewEntity() *place.Entity {
 	return &place.Entity{
+		UUID:             e.UUID,
 		FeatureUUIDs:     e.FeatureUUIDs,
 		Images:           e.toImages(),
 		Translations:     e.toTranslations(),
