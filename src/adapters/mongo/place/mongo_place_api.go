@@ -212,6 +212,7 @@ func (r *repo) filterToBson(filter place.EntityFilter) bson.M {
 func (r *repo) viewOptions() *options.FindOneOptions {
 	opts := &options.FindOneOptions{}
 	opts.SetProjection(bson.M{
+		entity.Fields.UUID:             1,
 		entity.Fields.FeatureUUIDs:     1,
 		entity.Fields.Images:           1,
 		entity.Fields.Translations:     1,
