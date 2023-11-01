@@ -24,8 +24,8 @@ type PlaceFilterRequest struct {
 }
 
 type PlaceFilterTimeSpentRequest struct {
-	Min int16 `json:"min" validate:"required,gt=0"`
-	Max int16 `json:"max" validate:"required,gt=0"`
+	Min int16 `json:"min" validate:"omitempty,gt=0"`
+	Max int16 `json:"max" validate:"omitempty,gt=0"`
 }
 
 func (r *PlaceFilterRequest) LoadPagination(pagination *PaginationRequest) *PlaceFilterRequest {
