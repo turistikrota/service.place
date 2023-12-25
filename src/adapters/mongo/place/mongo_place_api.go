@@ -98,7 +98,7 @@ func (r *repo) Delete(ctx context.Context, uuid string) *i18np.Error {
 }
 
 func (r *repo) Filter(ctx context.Context, filter place.EntityFilter, listConfig list.Config) (*list.Result[*place.Entity], *i18np.Error) {
-	anyFilter := r.filterToBson(filter)
+	anyFilter := r.filterToBson(filter, false)
 	transformer := func(e *entity.MongoPlace) *place.Entity {
 		return e.ToListEntity()
 	}
@@ -125,7 +125,34 @@ func (r *repo) Filter(ctx context.Context, filter place.EntityFilter, listConfig
 }
 
 func (r *repo) List(ctx context.Context, filter place.EntityFilter, listConfig list.Config) (*list.Result[*place.Entity], *i18np.Error) {
-	anyFilter := r.filterToBson(filter)
+	anyFilter := r.filterToBson(filter, false)
+	transformer := func(e *entity.MongoPlace) *place.Entity {
+		return e.ToAdminListEntity()
+	}
+	l, err := r.helper.GetListFilterTransform(ctx, anyFilter, transformer, r.sort(r.listOptions(listConfig), filter))
+	if err != nil {
+		return nil, err
+	}
+	filtered, _err := r.helper.GetFilterCount(ctx, anyFilter)
+	if _err != nil {
+		return nil, _err
+	}
+	total, _err := r.helper.GetFilterCount(ctx, r.baseFilter())
+	if _err != nil {
+		return nil, _err
+	}
+	return &list.Result[*place.Entity]{
+		IsNext:        filtered > listConfig.Offset+listConfig.Limit,
+		IsPrev:        listConfig.Offset > 0,
+		FilteredTotal: filtered,
+		Total:         total,
+		Page:          listConfig.Offset/listConfig.Limit + 1,
+		List:          l,
+	}, nil
+}
+
+func (r *repo) AdminList(ctx context.Context, filter place.EntityFilter, listConfig list.Config) (*list.Result[*place.Entity], *i18np.Error) {
+	anyFilter := r.filterToBson(filter, true)
 	transformer := func(e *entity.MongoPlace) *place.Entity {
 		return e.ToAdminListEntity()
 	}
@@ -187,9 +214,13 @@ func (r *repo) AdminView(ctx context.Context, uuid string) (*place.Entity, *i18n
 	return e.ToAdminViewEntity(), nil
 }
 
-func (r *repo) filterToBson(filter place.EntityFilter) bson.M {
+func (r *repo) filterToBson(filter place.EntityFilter, admin bool) bson.M {
 	list := make([]bson.M, 0)
-	list = append(list, r.baseFilter())
+	if admin {
+		list = append(list, r.adminBaseFilter())
+	} else {
+		list = append(list, r.baseFilter())
+	}
 	list = r.filterByQuery(list, filter)
 	list = r.filterFeatureUUIDs(list, filter)
 	list = r.filterByLocation(list, filter)

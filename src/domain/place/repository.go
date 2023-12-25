@@ -22,4 +22,5 @@ type Repository interface {
 	View(ctx context.Context, detail I18nDetail) (*Entity, *i18np.Error)
 	AdminView(ctx context.Context, uuid string) (*Entity, *i18np.Error)
 	List(ctx context.Context, filter EntityFilter, listConfig list.Config) (*list.Result[*Entity], *i18np.Error)
+	AdminList(ctx context.Context, filter EntityFilter, listConfig list.Config) (*list.Result[*Entity], *i18np.Error)
 }
