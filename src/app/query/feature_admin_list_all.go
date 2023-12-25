@@ -15,7 +15,7 @@ type (
 	}
 	AdminFeatureListAllHandler decorator.QueryHandler[AdminFeatureListAllQuery, *AdminFeatureListAllResult]
 	adminFeatureListAllHandler struct {
-		repo  feature.Repository
+		repo feature.Repository
 	}
 	AdminFeatureListAllHandlerConfig struct {
 		Repo     feature.Repository
@@ -26,14 +26,14 @@ type (
 func NewAdminFeatureListAllHandler(config AdminFeatureListAllHandlerConfig) AdminFeatureListAllHandler {
 	return decorator.ApplyQueryDecorators[AdminFeatureListAllQuery, *AdminFeatureListAllResult](
 		adminFeatureListAllHandler{
-			repo:  config.Repo,
+			repo: config.Repo,
 		},
 		config.CqrsBase,
 	)
 }
 
 func (h adminFeatureListAllHandler) Handle(ctx context.Context, query AdminFeatureListAllQuery) (*AdminFeatureListAllResult, *i18np.Error) {
-	res, err := h.repo.ListAll(ctx)
+	res, err := h.repo.AdminListAll(ctx)
 	if err != nil {
 		return nil, err
 	}

@@ -73,7 +73,7 @@ func (h placeAdminFilterHandler) withoutCache(ctx context.Context, query PlaceAd
 }
 
 func (h placeAdminFilterHandler) filter(ctx context.Context, query PlaceAdminFilterQuery) (*list.Result[*place.Entity], *i18np.Error) {
-	return h.repo.List(ctx, query.AdminFilter, list.Config{
+	return h.repo.AdminList(ctx, query.AdminFilter, list.Config{
 		Offset: query.Offset,
 		Limit:  query.Limit,
 	})
