@@ -19,6 +19,9 @@ type EntityFilter struct {
 
 func (e *EntityFilter) GetPerfectDistance() float64 {
 	if e.Distance == nil {
+		if e.Coordinates != nil && len(e.Coordinates) == 2 {
+			return 50
+		}
 		return 100
 	}
 	distances := map[float64]float64{
@@ -26,11 +29,14 @@ func (e *EntityFilter) GetPerfectDistance() float64 {
 		8:  300,
 		9:  200,
 		10: 100,
-		11: 50,
-		12: 20,
-		13: 10,
-		14: 5,
-		15: 3,
+		11: 80,
+		12: 60,
+		13: 40,
+		14: 20,
+		15: 10,
+		16: 5,
+		17: 3,
+		18: 2,
 	}
 	if distance, ok := distances[*e.Distance]; ok {
 		return distance
