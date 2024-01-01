@@ -56,8 +56,8 @@ github.com/mixarchitecture/cache v1.0.0 h1:Nk5Y3Yyzilltcam1G9c9Yazju9mn8is3x/HxI
 github.com/mixarchitecture/cache v1.0.0/go.mod h1:OnngeoIGIzAYRLEIOdqofKOiZhh8+19VzN/qNR44VXU=
 github.com/mixarchitecture/i18np v0.0.0-20230331235711-ece4c5f1bb52 h1:b9XRD7B5UsGZt7pIy6m3oFQNoSUKpNPxLIvG2x4lips=
 github.com/mixarchitecture/i18np v0.0.0-20230331235711-ece4c5f1bb52/go.mod h1:ukxDPcupA+YjV/Z24ZTuJpkvvLkknmMDzcBMcNrZc4I=
-github.com/mixarchitecture/microp v0.0.1 h1:0I4le5PzgV4IDaPc1bTWLXBOBxy24SUlrxygMtqGQ2I=
-github.com/mixarchitecture/microp v0.0.1/go.mod h1:jyt9vlJD4SueessQcOcSNHUNOVCw2e66pyrsy9iQFaA=
+github.com/mixarchitecture/microp v0.0.3 h1:dHUJsKZxAayqVXGMwrICkDEuhih+swAbQmZvs8NOv98=
+github.com/mixarchitecture/microp v0.0.3/go.mod h1:jyt9vlJD4SueessQcOcSNHUNOVCw2e66pyrsy9iQFaA=
 github.com/mixarchitecture/mredis v1.0.1 h1:BGAwqIpdjkgdbffi856Fw3eNYYdJxrIQNZEdIDVAKHM=
 github.com/mixarchitecture/mredis v1.0.1/go.mod h1:h6uPMmdurkbfACh/ZmZCBF903qNS/FbwdOEMX1yTj74=
 github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe/go.mod h1:wL8QJuTMNUDYhXwkmfOly8iTdp5TEcJFWZD2D7SIkUc=
